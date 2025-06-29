@@ -7,7 +7,7 @@ function ExerciseTab({exercise}) {
 
     return <div className="exercise">
         <div className="exercise-info">
-            <p>{exercise.title}</p>
+            <p>{exercise.name}</p>
             <button className="add-btn" onClick={addBtn}>Add</button>
         </div>
     </div>
