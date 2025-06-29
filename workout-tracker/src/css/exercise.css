@@ -1,0 +1,13 @@
+.exercise .exercise-info{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: center;
+    flex-direction: grid;
+    border: 2px solid;
+
+    margin-bottom: 2rem;
+}
+
+
+/* VOID THIS ATM */

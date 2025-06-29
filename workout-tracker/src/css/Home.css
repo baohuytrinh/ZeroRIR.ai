@@ -1,0 +1,99 @@
+.home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* border: solid 2px blue; */
+    
+}
+
+
+.home .enter-exercise {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    padding: 1rem;
+    ;
+
+    border: 2px solid white;
+    width: 1200px;
+    background-color:rgb(145, 204, 255);
+    border-radius: 2rem;
+}
+
+
+.home .enter-exercise .exercise-name {
+    width: 30rem;
+    height: 5rem;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 2rem;
+    text-indent: 12px;
+    border: none;
+}
+
+.home .enter-exercise .exercise-muscle {
+    width: 20rem;
+    height: 4rem;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 2rem;
+    text-indent: 12px;
+    border: none;
+    margin-left: 1rem;
+}
+
+
+.home .enter-exercise .exercise-sets {
+    width: 4rem;
+    height: 2rem;
+    border-radius: 2rem;
+    text-indent: 12px;
+    border: none;
+    margin-left: 1rem;
+}
+
+.home .enter-exercise .exercise-reps {
+    width: 4rem;
+    height: 2rem;
+    border-radius: 2rem;
+    text-indent: 12px;
+    border: none;
+    margin-left: 1rem;
+}
+
+.home .enter-exercise .exercise-weight {
+    width: 5rem;
+    height: 2rem;
+    border-radius: 2rem;
+    text-indent: 12px;
+    border: none; 
+    margin-left: 1rem;
+    margin-right: 3px;
+}
+
+.home .enter-exercise .add-btn{
+    margin-left: auto;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+}
+
+.home .enter-exercise .add-btn:hover{
+    transition: .3s ease all;
+    transform: scale(1.05);
+    background-color: bisque;
+    color: rgb(209, 148, 68);
+}
+
+.home .enter-exercise .add-btn:hover:active{
+    transition: .1s ease all;
+    transform: scale(1.15);
+    background-color: bisque;
+    color: rgb(209, 148, 68);
+}
