@@ -13,3 +13,15 @@ export const searchExercises = async (muscle) => {
     const data = await response.json();
     return data;
 };
+
+
+// backend
+
+export const addWorkout = async (workout) => {
+    const response = await fetch('http://localhost:8000/api/workouts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(workout)
+    });
+    return response.json();
+};
