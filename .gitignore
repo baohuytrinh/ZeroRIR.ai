@@ -24,3 +24,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Backend
+workout-tracker/.env
+workout-backend/.env
+workout-backend/node_modules/
+workout-backend/*.log
