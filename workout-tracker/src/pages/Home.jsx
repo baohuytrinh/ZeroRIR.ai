@@ -59,10 +59,12 @@ function Home(){
             setLoading(true);
             try {
                 const searchResults = await searchExercises(query);
-                setResults(searchResults);
+                console.log("API response:", searchResults);
+                setResults(Array.isArray(searchResults) ? searchResults : []);
                 setError(null);
             } catch (err) {
                 setError("Failed to load exercises...");
+                setResults([]); // Always set to array on error
             } finally {
                 setLoading(false);
             }
@@ -84,32 +86,34 @@ function Home(){
                 <input type="number" placeholder="Sets" className="exercise-sets"/>
                 <input type="number" placeholder="Reps" className="exercise-reps"/>
                 <input type="number" placeholder="Weight" className="exercise-weight"/> lbs
-                <button type="submit" className="add-btn">Add</button>
+                <button type="submit" className="add-btn">+</button>
             </form>
-            
+            <div className="search">
+                <div className="searchbar">   
+                    <input 
+                        type="text"
+                        placeholder="Search for exercises..."
+                        className="search-input"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    
+                
+                    {loading && <div>Loading...</div>}
+                    {error && <div>{error}</div>}
 
-            <input 
-                type="text"
-                placeholder="Search for exercises..."
-                className="search-input"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            
-            
-            {loading && <div>Loading...</div>}
-            {error && <div>{error}</div>}
-            <div className="exercise-grid">
-                {results.map((exercise, idx) => (
-                    <ExerciseTab exercise={exercise} key={exercise.id || idx} />
-                ))}
+                    <div className="exercise-grid">
+                        {results.map((exercise, idx) => (
+                            <ExerciseTab exercise={exercise} key={exercise.id || idx} />
+                        ))}
+                    </div>
+                </div> 
+
+
+                <div className="textbox">
+                    <p>e.g. Dumbbell Bicep Curl</p>
+                </div>
             </div>
-
-            
-
-            
-
-
         </div>
     );
 }

@@ -21,7 +21,7 @@ function ExerciseTab({exercise}) {
     return <div className="exercise">
         <div className="exercise-info">
             <p>{exercise.name}</p>
-            <button className="add-btn" onClick={() => handleAdd(exercise)}>Add</button>
+            <button className="add-btn" onClick={() => handleAdd(exercise)}>+</button>
                                                     {/* added arrow to handleadd */}
         </div>
     </div>
