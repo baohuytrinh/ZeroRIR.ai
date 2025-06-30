@@ -3,7 +3,7 @@ const BASE_URL = "https://api.api-ninjas.com/v1/exercises"
 
 export const searchExercises = async (muscle) => {
     const response = await fetch(
-        `${BASE_URL}?muscle=${encodeURIComponent(muscle)}`,
+        `${BASE_URL}?name=${encodeURIComponent(muscle)}`,
         {
             headers: {
                 "X-Api-Key": API_KEY
