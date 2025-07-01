@@ -5,11 +5,10 @@ import '../css/exercise.css'
 import { addWorkout } from '../services/api.js';
 
 function handleAdd(exercise) {
-    const sets = prompt('Sets?');
-    const reps = prompt('Reps?');
-    const weight = prompt('Weight?');
+    const sets = Number(prompt('Sets?'));
+    const reps = Number(prompt('Reps?'));
+    const weight = Number(prompt('Weight?'));
     addWorkout({ ...exercise, sets, reps, weight });
-    
 
 }
 
