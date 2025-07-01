@@ -1,0 +1,84 @@
+.workouts {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.workouts .workouts-empty {
+    border: 2px solid blue;
+}
+
+.workouts .workouts-chart {
+    border: 2px solid rgb(48, 136, 95);
+
+    margin-top: -5rem;
+    width: 1000px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.workouts .workouts-chart h2 {
+    border: 2px solid rgb(170, 21, 21);
+    border-radius: 2rem;
+
+
+    margin-bottom: 2rem;
+
+    font-weight: bold;
+    font-size: 30px;
+    padding: 3rem;
+    width: 400px;
+
+}
+
+.workouts .workouts-chart .workout-fetched {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+    height: 100px;
+    
+    align-items: center;
+    margin-bottom: 2rem;
+
+    border: 2px solid pink;
+    border-radius: 2rem;
+}
+
+.workouts .workouts-chart .workout-fetched:hover{
+    transition: .3s ease all;
+    transform: scale(1.05);
+}
+
+
+.workouts .workouts-chart .workout-fetched .workout-name {
+    /* border: 2px solid blue; */
+
+    /* border-radius: 1rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    */
+   
+    
+    margin: 2rem;
+    
+    
+
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.workouts .workouts-chart .workout-fetched .workout-num {
+    /* border: 2px solid brown; */
+
+
+    padding-right: 1rem;
+    font-weight: bold;
+    font-size: 18px;
+}

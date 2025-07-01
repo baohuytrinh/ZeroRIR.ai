@@ -1,5 +1,5 @@
 import '../css/exercise.css'
-
+import "../css/workouts.css"
 //backend
 
 import { addWorkout } from '../services/api.js';

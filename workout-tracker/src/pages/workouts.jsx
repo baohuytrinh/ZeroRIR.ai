@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 
+
 function Workouts(){
 
     const [workouts, setWorkouts] = useState([]);
@@ -23,13 +24,18 @@ function Workouts(){
             ) : (
                 <div className="workouts-chart">
                     <h2>Your Workout(s)</h2>
-                    <ul>
+                    <p>
                     {workouts.map((w, idx) => (
-                        <p key={idx}>
-                            {w.name} ({w.muscle}) - {w.sets}x{w.reps} - {w.weight} lbs
+                        <div className="workout-fetched">
+                            <p key={idx} className="workout-name">
+                                {w.name} ({w.muscle})  
                             </p>
+                            <p key={idx} className="workout-num">
+                             ({w.sets}x{w.reps}) -{'>'} {w.weight} lbs
+                            </p>
+                        </div>
                     ))}
-                    </ul>
+                    </p>
                 </div>
             )}
         </div>
