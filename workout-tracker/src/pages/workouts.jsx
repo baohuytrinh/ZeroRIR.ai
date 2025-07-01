@@ -14,7 +14,7 @@ function Workouts(){
 
     return (
         
-        <div>
+        <div className="workouts">
             {workouts.length === 0 ?  (
                 <div className="workouts-empty">
                     <h2>No workouts yet</h2>
