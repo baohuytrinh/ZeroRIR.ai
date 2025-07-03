@@ -3,7 +3,6 @@ import ExerciseTab from "../components/exercise";
 import '../css/home.css'
 import { searchExercises } from "../services/api.js";
 
-
 function debounce(fn, delay) {
     let timeoutId;
     return (...args) => {
@@ -13,19 +12,11 @@ function debounce(fn, delay) {
 }
 
 function Home(){
-    
-    // const exercises = [
-    //     { id: 1, title:"Flat Bench Press", weight:265 },
-    //     { id: 2, title:"DB Hammer Curls", weight:50 },
-    //     { id: 3, title:"Single Arm Tricep", weight:30 },
-    //     { id: 4, title:"DB Lateral Raises", weight:45 },
-    // ];
 
     const [searchQuery, setSearchQuery] = useState("");
     const [results, setResults] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-
 
     // add own exercise
 
@@ -34,28 +25,6 @@ function Home(){
     const [sets, setSets] = useState("");
     const [reps, setReps] = useState("");
     const [weight, setWeight] = useState("");
-
-
-    // uncomment
-
-    // const handleSearch = async (e) => {
-    //     e.preventDefault()
-    //     if (!searchQuery.trim()) return //removes all trailing strings (front/end)
-    //     if (loading) return
-
-    //     setLoading(true)
-    //     try{
-    //         const searchResults =  await searchExercises(searchQuery)
-    //         console.log(searchResults); 
-    //         setResults(searchResults)
-    //         setError(null)
-    //     } catch (err) {
-    //         console.log(err)
-    //         setError("Failed to load exercises...")
-    //     }finally{
-    //         setLoading(false)
-    //     }
-    // };
 
 
     const debouncedSearch = useCallback(
@@ -82,6 +51,7 @@ function Home(){
         []
     );
 
+
     useEffect(() => {
         debouncedSearch(searchQuery);
     }, [searchQuery, debouncedSearch]);
@@ -99,7 +69,6 @@ function Home(){
             reps: Number(reps),
             weight: Number(weight),
         };
-    
         try {
             // Send POST request to your backend API
             const response = await fetch('http://localhost:8000/api/workouts', {
@@ -109,9 +78,7 @@ function Home(){
                 },
                 body: JSON.stringify(newExercise),
             });
-    
             if (!response.ok) throw new Error('Failed to add exercise');
-    
             // Optionally clear the form
             alert("Added!")
             setExerciseName("");
@@ -119,29 +86,27 @@ function Home(){
             setSets("");
             setReps("");
             setWeight("");
-    
             // Optionally update UI or show a success message
             // You could also fetch the updated list of exercises here
-    
         } catch (err) {
             console.log(err)
             setError("Failed to add exercise");
         }
     };
 
-
-
+    
     return (
         <div className="home">
 
             <form className="enter-exercise" onSubmit={handleAddExercise}>
-                <input type="text" placeholder="Exercise" className="exercise-name" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)}/>
-                <input type="text" placeholder="Muscle Group" className="exercise-muscle" value={exerciseMuscle} onChange={(e) => setExerciseMuscle(e.target.value)}/>
-                <input type="number" placeholder="Sets" className="exercise-sets" value={sets} onChange={(e) => setSets(e.target.value)}/>
-                <input type="number" placeholder="Reps" className="exercise-reps" value={reps} onChange={(e) => setReps(e.target.value)}/>
-                <input type="number" placeholder="Weight" className="exercise-weight" value={weight} onChange={(e) => setWeight(e.target.value)}/> lbs
+                <input type="text" placeholder="Exercise" className="exercise-name" value={exerciseName} onChange={(e) => setExerciseName(e.target.value)} required/>
+                <input type="text" placeholder="Muscle Group" className="exercise-muscle" value={exerciseMuscle} onChange={(e) => setExerciseMuscle(e.target.value)} required/>
+                <input type="number" placeholder="Sets" className="exercise-sets" value={sets} onChange={(e) => setSets(e.target.value)} required/>
+                <input type="number" placeholder="Reps" className="exercise-reps" value={reps} onChange={(e) => setReps(e.target.value)} required/>
+                <input type="number" placeholder="Weight" className="exercise-weight" value={weight} onChange={(e) => setWeight(e.target.value)} required/> lbs
                 <button type="submit" className="add-btn">+</button>
             </form>
+
             <div className="search">
                 <div className="searchbar">   
                     <input 
@@ -151,8 +116,7 @@ function Home(){
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    
-                
+            
                     {loading && <div>Loading...</div>}
                     {error && <div>{error}</div>}
 
@@ -163,11 +127,11 @@ function Home(){
                     </div>
                 </div> 
 
-
                 <div className="textbox">
                     <p>e.g. Dumbbell Bicep Curl</p>
                 </div>
             </div>
+            
         </div>
     );
 }

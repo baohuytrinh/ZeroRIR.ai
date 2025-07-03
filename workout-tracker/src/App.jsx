@@ -6,6 +6,7 @@ import Workouts from './pages/workouts'
 import {Routes, Route} from "react-router-dom"
 import NavBar from "./components/NavBar"
 import Calender from './pages/calender'
+import PlanBuilder from './pages/PlanBuilder'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           {/* pages */}
           <Route path="/" element={<Home />}/>
           <Route path="/workouts" element={<Workouts />}/>
+          <Route path="/PlanBuilder" element={<PlanBuilder />}/>
           <Route path="/calender" element={<Calender />}/>
         </Routes>
       </main>
