@@ -19,8 +19,8 @@ connectDB();
 
 // Add a workout (only save the fields you want)
 app.post('/api/workouts', async (req, res) => {
-    const { name, muscle, sets, reps, weight } = req.body;
-    const workout = { name, muscle, sets, reps, weight };
+    const { demoUserID, name, muscle, sets, reps, weight } = req.body;
+    const workout = { demoUserID, name, muscle, sets, reps, weight };
     await workoutsCollection.insertOne(workout);
     res.status(201).json({ message: 'Workout saved!' });
 });
@@ -28,8 +28,8 @@ app.post('/api/workouts', async (req, res) => {
 // Get all workouts (only return the fields you want)
 app.get('/api/workouts', async (req, res) => {
     const workouts = await workoutsCollection.find().toArray();
-    const filtered = workouts.map(({ name, muscle, sets, reps, weight }) => ({
-        name, muscle, sets, reps, weight
+    const filtered = workouts.map(({ demoUserID, name, muscle, sets, reps, weight }) => ({
+        demoUserID, name, muscle, sets, reps, weight
     }));
     res.json(filtered);
 });

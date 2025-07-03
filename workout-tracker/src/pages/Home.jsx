@@ -3,6 +3,7 @@ import ExerciseTab from "../components/exercise";
 import '../css/home.css'
 import { searchExercises } from "../services/api.js";
 
+
 function debounce(fn, delay) {
     let timeoutId;
     return (...args) => {
@@ -91,6 +92,7 @@ function Home(){
     
         // Build the exercise object
         const newExercise = {
+            demoUserID: "demo123",
             name: exerciseName,
             muscle: exerciseMuscle,
             sets: Number(sets),
