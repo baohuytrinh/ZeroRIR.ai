@@ -1,0 +1,99 @@
+.workout-plan {
+    border: 1px solid green;
+    padding: 4rem;
+    margin-top: -7rem;
+    display: flex;
+    justify-content: center;
+    gap: 7rem;
+}
+
+.workout-plan .left {
+
+}
+
+.workout-plan .left .plan {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.workout-plan .left .plan .plan-name {
+    border: 2px teal solid;
+}
+
+.workout-plan .left .plan .plan-name h3{
+    border: 2px rgb(255, 255, 255) solid;
+
+    font-size: 35px;
+    font-weight: 1000;
+}
+
+.workout-plan .left .plan .plan-name input{
+    border: 2px rgb(255, 255, 255) solid;
+}
+
+.workout-plan .left .plan .added{
+    border: 1px solid blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.workout-plan .left .plan .each-added{
+    border: 1px solid rgb(0, 217, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: -40px;
+    
+    width: 500px;
+}
+
+.workout-plan .left .plan .each-added button{}
+
+.workout-plan .left .plan .each-added button:hover{
+    transform: scale(1.1);
+}
+
+.workout-plan .left .create-plan-btn {
+    border: 1px solid purple;
+
+}
+
+.workout-plan .left .create-plan-btn:hover{
+    transform: scale(1.1);
+}
+
+
+
+.workout-plan .right{
+
+}
+
+.workout-plan .right .add-to-plan{
+    border: 1px solid pink;
+
+}
+
+.workout-plan .right .search {
+    border: 1px solid yellow;
+
+}
+
+.workout-plan .right .search .searched-results{
+    border: 1px solid orange;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: -40px;
+}
+
+.workout-plan .right .search .searched-results button{
+}
+
+.workout-plan .right .search .searched-results button:hover{
+    transform: scale(1.1);
+}

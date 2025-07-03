@@ -43,92 +43,101 @@ function PlanBuilder() {
 
 
   return (
-    <>
+    <div className='workout-plan'>
 
-    <div>
-      <h3>Current Plan: {planName || "(No name yet)"}</h3>
-      <input
-        type="text"
-        placeholder="Plan Name"
-        value={planName}
-        onChange={e => setPlanName(e.target.value)}
-      />
-      <ul>
-        {planExercises.map((ex, i) => (
-          <li key={i}>
-            {ex.name} ({ex.muscle}) Sets: {ex.sets} Reps: {ex.reps} Weight: {ex.weight}
-            <button onClick={() => setPlanExercises(planExercises.filter((_, idx) => idx !== i))}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className='left'>
+        <div className='plan'>
+          <div className='plan-name'>
+            <h3>Current Plan: {planName || "(No name yet)"}</h3>
+            <input
+              type="text"
+              placeholder="Plan Name"
+              value={planName}
+              onChange={e => setPlanName(e.target.value)}
+            />
+          </div>
+          <ul className='added'>
+            {planExercises.map((ex, i) => (
+              <p className='each-added' key={i}>
+                {ex.name} ({ex.muscle})
+                <button onClick={() => setPlanExercises(planExercises.filter((_, idx) => idx !== i))}>
+                  Remove
+                </button>
+              </p>
+            ))}
+          </ul>
+        </div>
+        {/* ^^^^ PLAN NAME */}
+
+        <button
+          className='create-plan-btn'
+          onClick={async () => {
+            if (!planName || planExercises.length === 0) return alert("Name and at least one exercise required!");
+            await createWorkoutPlan({
+              demoUserID: "demo123",
+              name: planName,
+              exercises: planExercises,
+            });
+            setPlanName("");
+            setPlanExercises([]);
+            alert("Plan created!");
+            console.log("CREATED")
+          }}
+        >
+          Create Plan
+        </button>
+      </div>
+
+      <div className="right">
+        
+          <form onSubmit={e => {
+          e.preventDefault();
+          addToPlan({
+            name: customName,
+            muscle: customMuscle,
+            // sets: Number(customSets),
+            // reps: Number(customReps),
+            // weight: Number(customWeight),
+            custom: true // flag for custom exercises
+          });
+          setCustomName(""); 
+          setCustomMuscle(""); 
+          // setCustomSets(""); 
+          // setCustomReps(""); 
+          // setCustomWeight("");
+        }}
+        className='add-to-plan'
+        >
+
+          <input value={customName} onChange={e => setCustomName(e.target.value)} placeholder="Exercise Name" required />
+          <input value={customMuscle} onChange={e => setCustomMuscle(e.target.value)} placeholder="Muscle Group" required />
+          {/* <input value={customSets} onChange={e => setCustomSets(e.target.value)} placeholder="Sets" type="number" required />
+          <input value={customReps} onChange={e => setCustomReps(e.target.value)} placeholder="Reps" type="number" required />
+          <input value={customWeight} onChange={e => setCustomWeight(e.target.value)} placeholder="Weight" type="number" required /> */}
+          <button type="submit">Add Custom Exercise</button>
+        </form>
+
+
+        <div className='search'>
+          <input
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search for exercises..."
+          />
+          <button onClick={handleSearch}>Search</button>
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
+          <ul>
+            {results.map((ex, idx) => (
+              <p key={idx} className='searched-results'>
+                {ex.name} ({ex.muscle})
+                <button onClick={() => addToPlan(ex)}>Add to Plan</button>
+              </p>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
-    {/* ^^^^ PLAN NAME */}
-
-
-    <div>
-      <input
-        value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
-        placeholder="Search for exercises..."
-      />
-      <button onClick={handleSearch}>Search</button>
-      {loading && <div>Loading...</div>}
-      {error && <div>{error}</div>}
-      <ul>
-        {results.map((ex, idx) => (
-          <li key={idx}>
-            {ex.name} ({ex.muscle})
-            <button onClick={() => addToPlan(ex)}>Add to Plan</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-
-    <form onSubmit={e => {
-      e.preventDefault();
-      addToPlan({
-        name: customName,
-        muscle: customMuscle,
-        sets: Number(customSets),
-        reps: Number(customReps),
-        weight: Number(customWeight),
-        custom: true // flag for custom exercises
-      });
-      setCustomName(""); 
-      setCustomMuscle(""); 
-      setCustomSets(""); 
-      setCustomReps(""); 
-      setCustomWeight("");
-    }}>
-      <input value={customName} onChange={e => setCustomName(e.target.value)} placeholder="Exercise Name" required />
-      <input value={customMuscle} onChange={e => setCustomMuscle(e.target.value)} placeholder="Muscle Group" required />
-      <input value={customSets} onChange={e => setCustomSets(e.target.value)} placeholder="Sets" type="number" required />
-      <input value={customReps} onChange={e => setCustomReps(e.target.value)} placeholder="Reps" type="number" required />
-      <input value={customWeight} onChange={e => setCustomWeight(e.target.value)} placeholder="Weight" type="number" required />
-      <button type="submit">Add Custom Exercise</button>
-    </form>
-
-    <button
-      onClick={async () => {
-        if (!planName || planExercises.length === 0) return alert("Name and at least one exercise required!");
-        await createWorkoutPlan({
-          demoUserID: "demo123",
-          name: planName,
-          exercises: planExercises,
-        });
-        setPlanName("");
-        setPlanExercises([]);
-        alert("Plan created!");
-        console.log("CREATED")
-      }}
-    >
-      Create Plan
-    </button>
-
-    </>
   )
 }
 
