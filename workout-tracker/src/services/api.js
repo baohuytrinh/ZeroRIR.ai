@@ -20,7 +20,7 @@ export const searchExercises = async (muscle) => {
 export const addWorkout = async (workout) => {
     const response = await fetch('http://localhost:8000/api/workouts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...getAuthHeaders},
         body: JSON.stringify(workout)
     });
     return response.json();
@@ -29,8 +29,15 @@ export const addWorkout = async (workout) => {
 export const createWorkoutPlan = async (plan) => {
     const response = await fetch('http://localhost:8000/api/plans', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders},
       body: JSON.stringify(plan)
     });
     return response.json();
 };
+
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('token');
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
+  
+
