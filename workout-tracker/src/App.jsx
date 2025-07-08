@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import Workouts from './pages/workouts'
 import {Routes, Route} from "react-router-dom"
 import NavBar from "./components/NavBar"
-import Calender from './pages/calender'
+import CalendarPage from './pages/calendar'
 import PlanBuilder from './pages/PlanBuilder'
 import Auth from './pages/auth'
 import { useState, useEffect } from 'react'
@@ -41,7 +41,7 @@ function App() {
               <Route path="/" element={<Home />}/>
               <Route path="/workouts" element={<Workouts />}/>
               <Route path="/PlanBuilder" element={<PlanBuilder />}/>
-              <Route path="/calender" element={<Calender />}/>
+              <Route path="/calendar" element={<CalendarPage />}/>
             </Routes>
           </main>
         </>
