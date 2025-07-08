@@ -3,6 +3,7 @@ import ExerciseTab from "../components/exercise";
 import '../css/home.css'
 import { searchExercises } from "../services/api.js";
 
+
 function debounce(fn, delay) {
     let timeoutId;
     return (...args) => {
@@ -25,6 +26,8 @@ function Home(){
     const [sets, setSets] = useState("");
     const [reps, setReps] = useState("");
     const [weight, setWeight] = useState("");
+
+    // const [username, setUsername] = useState(localStorage.getItem('username') || '');
 
 
     const debouncedSearch = useCallback(
@@ -62,7 +65,7 @@ function Home(){
     
         // Build the exercise object
         const newExercise = {
-            demoUserID: "demo123",
+            
             name: exerciseName,
             muscle: exerciseMuscle,
             sets: Number(sets),
@@ -71,10 +74,12 @@ function Home(){
         };
         try {
             // Send POST request to your backend API
+            const token = localStorage.getItem('token');
             const response = await fetch('http://localhost:8000/api/workouts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(newExercise),
             });

@@ -28,36 +28,40 @@ const JWT_SECRET = process.env.JWT_SECRET
 
 
 // Add a workout (only save the fields you want)
-app.post('/api/workouts', async (req, res) => {
-    const { demoUserID, name, muscle, sets, reps, weight } = req.body;
-    const workout = { demoUserID, name, muscle, sets, reps, weight };
+app.post('/api/workouts', authMiddleware, async (req, res) => {
+    const username = req.user.username; // jwt
+    const { name, muscle, sets, reps, weight } = req.body;
+    const workout = { username, name, muscle, sets, reps, weight };
     await workoutsCollection.insertOne(workout);
     res.status(201).json({ message: 'Workout saved!' });
 });
 
 // Get all workouts (only return the fields you want)
-app.get('/api/workouts', async (req, res) => {
-    const workouts = await workoutsCollection.find().toArray();
-    const filtered = workouts.map(({ demoUserID, name, muscle, sets, reps, weight }) => ({
-        demoUserID, name, muscle, sets, reps, weight
+app.get('/api/workouts', authMiddleware, async (req, res) => {
+    const username = req.user.username; // jwt
+    const workouts = await workoutsCollection.find({username}).toArray();
+    const filtered = workouts.map(({ name, muscle, sets, reps, weight }) => ({
+         name, muscle, sets, reps, weight
     }));
     res.json(filtered);
 });
 
 // add a plan
-app.post('/api/plans', async (req, res) => {
-    const { demoUserID, name, exercises } = req.body;
-    if (!demoUserID || !name || !Array.isArray(exercises)) {
+app.post('/api/plans', authMiddleware, async (req, res) => {
+    const username = req.user.username; 
+    const {name, exercises } = req.body;
+    if (!username || !name || !Array.isArray(exercises)) {
         return res.status(400).json({ error: "Missing fields" });
     }
-    await plansCollection.insertOne({ demoUserID, name, exercises });
+    await plansCollection.insertOne({ username, name, exercises });
     res.status(201).json({ message: 'Plan saved!' });
 });
 
-app.get('/api/plans', async (req, res) => {
-    const plans = await plansCollection.find().toArray();
+app.get('/api/plans', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+    const plans = await plansCollection.find({username}).toArray();
     const filtered = plans.map(plan => 
-        ({ demoUserID: plan.demoUserID, name: plan.name, exercises: plan.exercises.map(ex => 
+        ({ name: plan.name, exercises: plan.exercises.map(ex => 
             ({name: ex.name, muscle: ex.muscle})) 
         }));
     res.json(filtered);

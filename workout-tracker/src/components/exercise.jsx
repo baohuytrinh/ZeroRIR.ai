@@ -5,11 +5,11 @@ import "../css/workouts.css"
 import { addWorkout } from '../services/api.js';
 
 function handleAdd(exercise) {
-    const demoUserID = "searchDemo";
+    // const [username, setUsername] = useState(localStorage.getItem('username') || '');
     const sets = Number(prompt('Sets?'));
     const reps = Number(prompt('Reps?'));
     const weight = Number(prompt('Weight?'));
-    addWorkout({ demoUserID, ...exercise, sets, reps, weight });
+    addWorkout({ ...exercise, sets, reps, weight });
 
 }
 

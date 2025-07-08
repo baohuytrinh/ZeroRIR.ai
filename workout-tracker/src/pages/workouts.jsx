@@ -6,10 +6,19 @@ function Workouts(){
     const [workouts, setWorkouts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/workouts')
-        .then(res =>res.json())
+        const token = localStorage.getItem('token');
+        fetch('http://localhost:8000/api/workouts', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('Unauthorized or error fetching workouts');
+            return res.json();
+        })
         .then(data => setWorkouts(data))
-        .catch(err => console.error("failed to fetch workouts:", err));
+        .catch(err => {
+            setWorkouts([]); // Optionally clear workouts on error
+            console.error("failed to fetch workouts:", err);
+        });
     }, []);
 
 

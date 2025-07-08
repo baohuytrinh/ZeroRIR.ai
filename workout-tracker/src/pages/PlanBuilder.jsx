@@ -20,7 +20,7 @@ function PlanBuilder() {
   const [customReps, setCustomReps] = useState("");
   const [customWeight, setCustomWeight] = useState("");
 
-  
+  // const [username, setUsername] = useState(localStorage.getItem('username') || '');
 
   const handleSearch = async () => {
     setLoading(true);
@@ -74,7 +74,7 @@ function PlanBuilder() {
           onClick={async () => {
             if (!planName || planExercises.length === 0) return alert("Name and at least one exercise required!");
             await createWorkoutPlan({
-              demoUserID: "demo123",
+              
               name: planName,
               exercises: planExercises,
             });
