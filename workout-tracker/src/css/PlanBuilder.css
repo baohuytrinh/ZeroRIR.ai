@@ -28,6 +28,7 @@
 
     font-size: 35px;
     font-weight: 1000;
+    margin-bottom: 1rem;
 }
 
 .workout-plan .left .plan .plan-name input{
@@ -70,11 +71,14 @@
 
 
 .workout-plan .right{
-
+    
+    
 }
 
 .workout-plan .right .add-to-plan{
     border: 1px solid pink;
+
+    margin-bottom: 3rem;
 
 }
 

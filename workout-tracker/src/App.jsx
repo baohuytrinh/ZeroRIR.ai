@@ -7,22 +7,50 @@ import {Routes, Route} from "react-router-dom"
 import NavBar from "./components/NavBar"
 import Calender from './pages/calender'
 import PlanBuilder from './pages/PlanBuilder'
+import Auth from './pages/auth'
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  const [username, setUsername] = useState(localStorage.getItem('username') || '');
+
+  const handleAuth = (token, username) => {
+    setIsLoggedIn(true);
+    setUsername(username);
+    localStorage.setItem('username', username);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    setIsLoggedIn(false);
+    setUsername('');
+  }
+
+
+
   return (
     <div>
-      <NavBar />
-      <main className = 'main-content'> 
-        <Routes>
-          {/* pages */}
-          <Route path="/" element={<Home />}/>
-          <Route path="/workouts" element={<Workouts />}/>
-          <Route path="/PlanBuilder" element={<PlanBuilder />}/>
-          <Route path="/calender" element={<Calender />}/>
-        </Routes>
-      </main>
+      {isLoggedIn ? (
+        <>
+          <NavBar />
+          <button className='logout-btn' onClick={handleLogout} style={{ position: 'absolute', top:10}}>Logout</button>
+          <main className = 'main-content'> 
+          <Routes>
+              {/* pages */}
+              <Route path="/" element={<Home />}/>
+              <Route path="/workouts" element={<Workouts />}/>
+              <Route path="/PlanBuilder" element={<PlanBuilder />}/>
+              <Route path="/calender" element={<Calender />}/>
+            </Routes>
+          </main>
+        </>
+      ) : (
+        <Auth onAuth={handleAuth} />
+        )}
+  
     </div>
-  )
+  );
 }
 
 
