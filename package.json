@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@hello-pangea/dnd": "^18.0.1",
-    "date-fns": "^4.1.0",
-    "react-big-calendar": "^1.19.4"
-  }
-}
