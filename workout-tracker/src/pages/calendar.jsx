@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -7,6 +8,14 @@ import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '../css/calendar.css';
+
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
+
+import { fetchCalendarEvents, addCalendarEvent, updateCalendarEvent, deleteCalendarEvent} from '../services/api.js';
+
+const DnDCalendar = withDragAndDrop(Calendar);
+
 
 const locales = { 'en-US' : enUS };
 const localizer = dateFnsLocalizer({
@@ -35,15 +44,55 @@ const initialEvents = [
 ];
 
 function CalendarPage() {
-  console.log("CalendarPage rendered");
   const [events, setEvents] = useState(initialEvents);
   const [date, setDate] = useState(new Date()); 
   const [view, setView] = useState('month');
 
+  useEffect(() => {
+    fetchCalendarEvents().then(fetchedEvents => {
+      // Convert start/end to Date objects
+      const eventsWithDates = fetchedEvents.map(ev => ({
+        ...ev,
+        start: new Date(ev.start),
+        end: new Date(ev.end)
+      }));
+      setEvents(eventsWithDates);
+    });
+  }, []);
+
+  // Handler for moving events
+  const moveEvent = async ({ event, start, end, isAllDay }) => {
+    const updated = { ...event, start, end, allDay: isAllDay };
+    setEvents(events.map(ev => ev === event ? updated : ev));
+    if (event._id) {
+      await updateCalendarEvent(event._id, { start, end, allDay: isAllDay });
+    }
+  };
+
+  // Handler for adding new events (e.g., via a button or external drag)
+  const handleAddEvent = async () => {
+    const newEvent = {
+      title: "Test Event",
+      start: new Date(),
+      end: new Date(new Date().getTime() + 60 * 60 * 1000), // 1 hour later
+      allDay: false
+    };
+    const saved = await addCalendarEvent(newEvent);
+    setEvents([...events, { ...saved, start: new Date(saved.start), end: new Date(saved.end) }]);
+    };
+
+  const handleDeleteEvent = async (event) => {
+    if (window.confirm(`Delete event "${event.title}"?`)) {
+      await deleteCalendarEvent(event._id);
+      setEvents(events.filter(ev => ev._id !== event._id));
+      }
+  };
+
   return (
     
     <div style={{ height: 600, margin: '2rem'}}>
-      <Calendar
+      <button className="add-event-btn" onClick={handleAddEvent} style={{marginBottom: 10}}>Add Test Event</button>
+      <DnDCalendar
           localizer={localizer}
           events={events}
           startAccessor="start"
@@ -51,14 +100,11 @@ function CalendarPage() {
           style={{ height: 500 }}
           date={date}
           view={view}                    
-          onNavigate={(newDate) => {
-            console.log('Navigate button clicked! New date:', newDate);
-            setDate(newDate);
-          }}
-          onView={(newView) => {
-            console.log('View button clicked! New view:', newView);
-            setView(newView);
-          }}
+          onNavigate={setDate}
+          onView={setView}
+          onEventDrop={moveEvent} 
+          draggableAccessor={() => true} 
+          onSelectEvent={handleDeleteEvent}
         />
     </div>
   );

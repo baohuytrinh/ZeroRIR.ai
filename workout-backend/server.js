@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -15,6 +15,7 @@ const client = new MongoClient(process.env.MONGODB_URI);
 let workoutsCollection;
 let plansCollection;
 let usersCollection;
+let calendarCollection;
 
 async function connectDB() {
     await client.connect();
@@ -22,6 +23,7 @@ async function connectDB() {
     workoutsCollection = db.collection('workouts');
     plansCollection = db.collection('plans');
     usersCollection = db.collection('users');
+    calendarCollection = db.collection('calendarEvents');
 }
 connectDB();
 const JWT_SECRET = process.env.JWT_SECRET
@@ -67,6 +69,42 @@ app.get('/api/plans', authMiddleware, async (req, res) => {
     res.json(filtered);
 });
 
+//calendar
+
+app.post('/api/calendar', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+    const {title, start, end, allDay} = req.body;
+    if (!title || !start || !end) return res.status(400).json({ error: "Missing fields" });
+    const result = await calendarCollection.insertOne({ username, title, start, end, allDay});
+    res.status(201).json({ _id: result.insertedId, title, start, end, allDay });
+});
+
+app.get('/api/calendar', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+    const events = await calendarCollection.find({username}).toArray();
+    res.json(events);
+});
+
+app.put('/api/calendar/:id', authMiddleware, async (req,res) => {
+    const username = req.user.username;
+    const {id} = req.params;
+    const {start, end, allDay} = req.body;
+    await calendarCollection.updateOne(
+        {_id: new ObjectId(id), username},
+        { $set: {start, end, allDay } }
+    );
+    res.json({ message: "Event updated" });
+});
+
+app.delete('/api/calendar/:id', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+    const { id } = req.params;
+    await calendarCollection.deleteOne({ _id: new ObjectId(id), username});
+    res.json({ message: "Event deleted" });
+});
+
+//authentication
+
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ error: 'Missing fields' });
@@ -75,7 +113,6 @@ app.post('/api/register', async (req, res) => {
     const existing = await usersCollection.findOne({ username });
     if (existing) return res.status(400).json({ error: 'User already exists' });
 
-    
     const passwordHash = await bcrypt.hash(password, 10);
     await usersCollection.insertOne({ username, passwordHash });
     res.json({ message: 'User registered' });
@@ -107,6 +144,8 @@ function authMiddleware(req, res, next) {
         res.status(401).json({ error: 'Invalid token' });
     }
 }
+
+
 
 app.get('/api/protected', authMiddleware, (req, res) => {
     res.json({ message: `Hello, ${req.user.username}` });

@@ -41,3 +41,37 @@ const getAuthHeaders = () => {
   };
   
 
+//calendar
+
+export const fetchCalendarEvents = async () => {
+    const response = await fetch('http://localhost:8000/api/calendar', {
+      headers: { ...getAuthHeaders() }
+    });
+    return response.json();
+  };
+  
+  export const addCalendarEvent = async (event) => {
+    const response = await fetch('http://localhost:8000/api/calendar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+      body: JSON.stringify(event)
+    });
+    return response.json();
+  };
+  
+  export const updateCalendarEvent = async (id, updates) => {
+    const response = await fetch(`http://localhost:8000/api/calendar/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+      body: JSON.stringify(updates)
+    });
+    return response.json();
+  };
+
+  export const deleteCalendarEvent = async (id) => {
+    const response = await fetch(`http://localhost:8000/api/calendar/${id}`, {
+        method: 'DELETE',
+        headers: { ...getAuthHeaders() 
+        }});
+    return response.json();
+  };
