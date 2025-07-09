@@ -23,3 +23,13 @@
 
   
 }
+
+.rbc-btn-group button {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+.rbc-toolbar button {
+  pointer-events: auto !important;
+  cursor: pointer;
+}

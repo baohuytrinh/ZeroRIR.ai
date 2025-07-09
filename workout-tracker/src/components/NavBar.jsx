@@ -11,6 +11,7 @@ function NavBar(){
             <Link to='/workouts' className='nav-link'>Workouts</Link>
             <Link to='/PlanBuilder' className='nav-link'>Plans</Link>
             <Link to='/calendar' className='nav-link'>Calendar</Link>
+            <Link to='/testCalendar' className="nav-link">Test Calendar</Link>
         </div>
     </nav>
 }
