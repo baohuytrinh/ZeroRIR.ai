@@ -1,0 +1,11 @@
+calendar -> 
+    - allow drag/drop outside of calendar to remove
+    - basic PPL buttons for users w/o workout plans
+    - replace Add Test Event btn to PPL
+    -
+
+calendar styling ->
+    - change color for today
+    - change color for days outside of cur month
+    - change DnD workout plan colors
+    - 

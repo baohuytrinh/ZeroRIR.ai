@@ -119,9 +119,9 @@ function CalendarPage() {
   };
 
   return (
-    <div className="calendar-container" style={{display: 'flex', justifyContent: 'center', gap: '3rem', border: '1px solid black'}}>
-      <div className="plans-box" style={{width: 250, marginRight:20, border: '1px solid green'}}>
-        <h4>Your workout plans</h4>
+    <div className="calendar-container" style={{display: 'flex', justifyContent: 'center', gap: '3rem', border: '1px solid black', marginTop: '-5rem'}}>
+      <div className="plans-box" >
+        <h4 style={{fontSize: '30px'}}>Your workout plans</h4>
         {plans.map((plan, idx) => (
           <div 
             className="draggable-plan"
@@ -130,19 +130,14 @@ function CalendarPage() {
 
             onDragStart={() => handleDragStart(plan)}
             
-            style={{
-              border: '1px solid #ccc',
-              margin: '8px 0',
-              padding: 8,
-              background: '#f9f9f9',
-              cursor: 'grab'
-            }}>
-              <b>{plan.name}</b>
-              <ul>
+
+            >
+              <b style={{fontSize: '30px'}}>{plan.name}</b>
+              <p>
                 {plan.exercises.map((ex, i) => (
-                  <li key={i}> {ex.name} ({ex.muscle})</li>
+                  <p className= 'workout-plan-cal' key={i}> {ex.name} ({ex.muscle})</p>
                 ))}
-              </ul>
+              </p>
           </div>
         ))}
       </div>

@@ -7,3 +7,52 @@
     pointer-events: auto !important;
     cursor: pointer;
 }
+
+.calendar-container {
+
+}
+
+.calendar-container .plans-box{
+    width: 250;
+    margin-right: 20;
+    border: 1px solid green;
+}
+
+.calendar-container .plans-box .draggable-plan{
+    background-color: rgb(24, 104, 209);
+    cursor: grab;
+    margin: 12px 16px 2rem;
+    padding: 0 5px .3rem 5px;
+    border-radius: 1rem;
+    
+}
+
+.calendar-container .plans-box .draggable-plan:hover{
+    transform: scale(1.02);
+    transition: ease .3s all;
+    background-color: rgb(86, 151, 236);
+
+}
+
+.calendar-container .plans-box .draggable-plan:active{
+    background-color: rgb(86, 151, 236);
+}
+
+.calendar-container .plans-box .draggable-plan .workout-plan-cal{
+    border-top: dashed 1px #dadada;
+    margin: 0 1rem 0 1rem;
+    max-width: 250px;
+    padding: .5rem 0 .5rem 0;
+}
+
+.calendar-container .calendar{
+    
+}
+
+.calendar-container .calendar .add-event.btn DnDCalendar{
+    
+}
+
+.calendar-container .calendar {
+    
+}
