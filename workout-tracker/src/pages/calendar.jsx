@@ -47,10 +47,14 @@ function CalendarPage() {
   const [events, setEvents] = useState(initialEvents);
   const [date, setDate] = useState(new Date()); 
   const [view, setView] = useState('month');
+  const [plans, setPlans] = useState([]);
+  
+  const [draggedPlan, setDraggedPlan] = useState(null);
+
 
   useEffect(() => {
     fetchCalendarEvents().then(fetchedEvents => {
-      // Convert start/end to Date objects
+      //converted start/end to date objs
       const eventsWithDates = fetchedEvents.map(ev => ({
         ...ev,
         start: new Date(ev.start),
@@ -58,9 +62,15 @@ function CalendarPage() {
       }));
       setEvents(eventsWithDates);
     });
+
+    fetch('http://localhost:8000/api/plans', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+      .then(res => res.json())
+      .then(setPlans);
   }, []);
 
-  // Handler for moving events
+  //moves objects/events
   const moveEvent = async ({ event, start, end, isAllDay }) => {
     const updated = { ...event, start, end, allDay: isAllDay };
     setEvents(events.map(ev => ev === event ? updated : ev));
@@ -69,12 +79,12 @@ function CalendarPage() {
     }
   };
 
-  // Handler for adding new events (e.g., via a button or external drag)
+  //adding new events (button, external drag, etc)
   const handleAddEvent = async () => {
     const newEvent = {
       title: "Test Event",
       start: new Date(),
-      end: new Date(new Date().getTime() + 60 * 60 * 1000), // 1 hour later
+      end: new Date(new Date().getTime() + 60 * 60 * 1000), //1hr
       allDay: false
     };
     const saved = await addCalendarEvent(newEvent);
@@ -88,25 +98,76 @@ function CalendarPage() {
       }
   };
 
+  const handleDragStart = (plan) => {
+    setDraggedPlan(plan);
+  };
+
+  const handleDropFromOutside = ({ start, end, allDay }) => {
+    if (!draggedPlan) return;
+    //creates new event based on plan
+    const newEvent = {
+      title: draggedPlan.name,
+      start,
+      end,
+      allDay,
+      plan: draggedPlan, //optionally store plan details
+    };
+    //save to db
+    addCalendarEvent(newEvent).then(saved => {
+      setEvents([...events, { ...saved, start: new Date(saved.start), end: new Date(saved.end) }]);
+    });
+  };
+
   return (
-    
-    <div style={{ height: 600, margin: '2rem'}}>
-      <button className="add-event-btn" onClick={handleAddEvent} style={{marginBottom: 10}}>Add Test Event</button>
-      <DnDCalendar
-          localizer={localizer}
-          events={events}
-          startAccessor="start"
-          endAccessor="end"
-          style={{ height: 500 }}
-          date={date}
-          view={view}                    
-          onNavigate={setDate}
-          onView={setView}
-          onEventDrop={moveEvent} 
-          draggableAccessor={() => true} 
-          onSelectEvent={handleDeleteEvent}
-        />
+    <div className="calendar-container" style={{display: 'flex', justifyContent: 'center', gap: '3rem', border: '1px solid black'}}>
+      <div className="plans-box" style={{width: 250, marginRight:20, border: '1px solid green'}}>
+        <h4>Your workout plans</h4>
+        {plans.map((plan, idx) => (
+          <div 
+            className="draggable-plan"
+            key={idx}
+            draggable
+
+            onDragStart={() => handleDragStart(plan)}
+            
+            style={{
+              border: '1px solid #ccc',
+              margin: '8px 0',
+              padding: 8,
+              background: '#f9f9f9',
+              cursor: 'grab'
+            }}>
+              <b>{plan.name}</b>
+              <ul>
+                {plan.exercises.map((ex, i) => (
+                  <li key={i}> {ex.name} ({ex.muscle})</li>
+                ))}
+              </ul>
+          </div>
+        ))}
+      </div>
+      <div className='calendar' style={{ height: 600, margin: '2rem', width: '1000px'}}>
+        <button className="add-event-btn" onClick={handleAddEvent} style={{marginBottom: 10}}>Add Test Event</button>
+        <DnDCalendar
+            localizer={localizer}
+            events={events}
+            startAccessor="start"
+            endAccessor="end"
+            style={{ height: 500 }}
+            date={date}
+            view={view}                    
+            onNavigate={setDate}
+            onView={setView}
+            onEventDrop={moveEvent} 
+            draggableAccessor={() => true} 
+            onSelectEvent={handleDeleteEvent}
+            
+            onDropFromOutside={handleDropFromOutside}
+            dragFromOutsideItem={() => draggedPlan}
+          />
+      </div>
     </div>
+    
   );
 }
 
