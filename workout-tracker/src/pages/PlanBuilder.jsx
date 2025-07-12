@@ -13,7 +13,6 @@ function PlanBuilder() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // For custom exercise form
   const [customName, setCustomName] = useState("");
   const [customMuscle, setCustomMuscle] = useState("");
   const [customSets, setCustomSets] = useState("");
@@ -40,7 +39,6 @@ function PlanBuilder() {
   const addToPlan = (exercise) => {
     setPlanExercises([...planExercises, exercise]);
   };
-
 
   return (
     <div className='workout-plan'>

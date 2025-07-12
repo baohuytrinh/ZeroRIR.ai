@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 export default function Auth({ onAuth }) {
-  const [mode, setMode] = useState('login'); // or 'register'
+  const [mode, setMode] = useState('login'); 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

@@ -19,7 +19,6 @@ function Home(){
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    // add own exercise
 
     const [exerciseName, setExerciseName] = useState("");
     const [exerciseMuscle, setExerciseMuscle] = useState("");
@@ -27,7 +26,6 @@ function Home(){
     const [reps, setReps] = useState("");
     const [weight, setWeight] = useState("");
 
-    // const [username, setUsername] = useState(localStorage.getItem('username') || '');
 
 
     const debouncedSearch = useCallback(
@@ -46,11 +44,11 @@ function Home(){
                 setError(null);
             } catch (err) {
                 setError("Failed to load exercises...");
-                setResults([]); // Always set to array on error
+                setResults([]); 
             } finally {
                 setLoading(false);
             }
-        }, 300), // 300ms debounce
+        }, 300),
         []
     );
 
@@ -63,7 +61,7 @@ function Home(){
     const handleAddExercise = async (e) => {
         e.preventDefault();
     
-        // Build the exercise object
+        
         const newExercise = {
             
             name: exerciseName,
@@ -73,7 +71,7 @@ function Home(){
             weight: Number(weight),
         };
         try {
-            // Send POST request to your backend API
+            
             const token = localStorage.getItem('token');
             const response = await fetch('http://localhost:8000/api/workouts', {
                 method: 'POST',
@@ -84,15 +82,14 @@ function Home(){
                 body: JSON.stringify(newExercise),
             });
             if (!response.ok) throw new Error('Failed to add exercise');
-            // Optionally clear the form
+            
             alert("Added!")
             setExerciseName("");
             setExerciseMuscle("");
             setSets("");
             setReps("");
             setWeight("");
-            // Optionally update UI or show a success message
-            // You could also fetch the updated list of exercises here
+            
         } catch (err) {
             console.log(err)
             setError("Failed to add exercise");

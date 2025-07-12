@@ -9,8 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-
-
 const client = new MongoClient(process.env.MONGODB_URI);
 let workoutsCollection;
 let plansCollection;
@@ -28,8 +26,7 @@ async function connectDB() {
 connectDB();
 const JWT_SECRET = process.env.JWT_SECRET
 
-
-// Add a workout (only save the fields you want)
+//workout
 app.post('/api/workouts', authMiddleware, async (req, res) => {
     const username = req.user.username; // jwt
     const { name, muscle, sets, reps, weight } = req.body;
@@ -38,7 +35,6 @@ app.post('/api/workouts', authMiddleware, async (req, res) => {
     res.status(201).json({ message: 'Workout saved!' });
 });
 
-// Get all workouts (only return the fields you want)
 app.get('/api/workouts', authMiddleware, async (req, res) => {
     const username = req.user.username; // jwt
     const workouts = await workoutsCollection.find({username}).toArray();
@@ -48,7 +44,7 @@ app.get('/api/workouts', authMiddleware, async (req, res) => {
     res.json(filtered);
 });
 
-// add a plan
+//plan
 app.post('/api/plans', authMiddleware, async (req, res) => {
     const username = req.user.username; 
     const {name, exercises } = req.body;
@@ -70,7 +66,6 @@ app.get('/api/plans', authMiddleware, async (req, res) => {
 });
 
 //calendar
-
 app.post('/api/calendar', authMiddleware, async (req, res) => {
     const username = req.user.username;
     const {title, start, end, allDay} = req.body;
@@ -104,7 +99,6 @@ app.delete('/api/calendar/:id', authMiddleware, async (req, res) => {
 });
 
 //authentication
-
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ error: 'Missing fields' });
@@ -147,7 +141,6 @@ function authMiddleware(req, res, next) {
 
 
 //openAI
-
 app.post('/api/ai', authMiddleware, async (req, res) => {
     const { prompt } = req.body;
     if (!prompt) return res.status(400).json({ error: 'Missing prompt' });
@@ -193,4 +186,4 @@ app.get('/api/protected', authMiddleware, (req, res) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Server running on port http://localhost:${PORT}/api/workouts`));
+app.listen(PORT, ()  => console.log(`Server running on port http://localhost:${PORT}/api/workouts`));

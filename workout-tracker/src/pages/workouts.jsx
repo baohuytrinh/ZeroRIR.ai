@@ -16,7 +16,7 @@ function Workouts(){
         })
         .then(data => setWorkouts(data))
         .catch(err => {
-            setWorkouts([]); // Optionally clear workouts on error
+            setWorkouts([]);
             console.error("failed to fetch workouts:", err);
         });
     }, []);
