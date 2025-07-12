@@ -9,6 +9,7 @@ import CalendarPage from './pages/calendar'
 import PlanBuilder from './pages/PlanBuilder'
 import Auth from './pages/auth'
 import { useState, useEffect } from 'react'
+import Chatbot from './components/chatbot'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -37,6 +38,7 @@ function App() {
       {isLoggedIn ? (
         <>
           <NavBar />
+          <Chatbot />
           <button className='logout-btn' onClick={handleLogout} style={{ position: 'absolute', top:10}}>Logout</button>
           <main className = 'main-content'> 
           <Routes>
