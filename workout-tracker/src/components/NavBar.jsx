@@ -4,7 +4,7 @@ import '../css/NavBar.css'
 function NavBar(){
     return <nav className="navbar">
         <div className='navbar-brand'>
-            <Link to="/">Workout Tracker</Link>
+            <Link to="/">ZeroRIR.ai</Link>
         </div>
         <div className="navbar-links">
             <Link to='/' className='nav-link'>Home</Link>
