@@ -119,7 +119,7 @@ function CalendarPage() {
   };
 
   return (
-    <div className="calendar-container" style={{display: 'flex', justifyContent: 'center', gap: '3rem', border: '1px solid black', marginTop: '-5rem'}}>
+    <div className="calendar-container" style={{display: 'flex', justifyContent: 'center', gap: '3rem', border: '1px solid black', marginTop: '-5rem', paddingRight:'8rem', left: ''}}>
       <div className="plans-box" >
         <h4 style={{fontSize: '30px'}}>Your workout plans</h4>
         {plans.map((plan, idx) => (

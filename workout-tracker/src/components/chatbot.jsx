@@ -33,12 +33,12 @@ function Chatbot() {
   return (
     <div style={{
         position: 'fixed',
-        bottom: 20,
-        right: 20,
-        width: 320,
-        height: 400,
+        bottom: 10,
+        right: 10,
+        width: 350,
+        height: 700,
         background: 'radial-gradient(ellipse at center, #122946 0%, #10111a 100%)',
-        border: '1px solid #ccc',
+        border: '1px solid rgb(170, 165, 230)',
         borderRadius: 10,
         boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
         zIndex: 1000,
@@ -46,10 +46,11 @@ function Chatbot() {
         flexDirection: 'column',
       }}
     >
+        <b>AI Chat</b>
         <div style = {{flex: 1, overflowY: 'auto', padding: 10}}>
             {messages.map((msg,idx) => (
                 <div key={idx} style={{
-                    textAlign: msg.from === 'user' ? 'right' : 'left',
+                    textAlign: msg.from === 'user' ? 'left' : 'left',
                     margin: '6px 0',
                     color: msg.from === 'user' ? '#1976d2' : 'white',
                 }}>
