@@ -146,6 +146,47 @@ function authMiddleware(req, res, next) {
 }
 
 
+//openAI
+
+app.post('/api/ai', authMiddleware, async (req, res) => {
+    const { prompt } = req.body;
+    if (!prompt) return res.status(400).json({ error: 'Missing prompt' });
+
+    try {
+        const username = req.user.username;
+        const plans = await plansCollection.find({username}).toArray();
+        const workouts = await workoutsCollection.find({username}).toArray();
+
+        const userData = `
+        User's Plans: ${JSON.stringify(plans)}
+        User's Workouts: ${JSON.stringify(workouts)}
+        `;
+
+        const fullPrompt = `
+        You are a helpful fitness assistant. Here is information about the user:
+        ${userData}
+        Now answer the user's question: ${prompt}`
+
+        const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': `Bearer ${process.env.openAI_API_KEY}`
+            },
+            body: JSON.stringify({
+                model: "gpt-4.1",
+                messages: [{ role: "user", content: fullPrompt }],
+                max_tokens: 150
+            })
+        });
+        const data = await openaiRes.json();
+        res.json({ ai: data.choices[0].message.content });
+    } catch (err) {
+        res.status(500).json({error: 'AI request failed', details: err.message });
+    }
+});
+
+
 
 app.get('/api/protected', authMiddleware, (req, res) => {
     res.json({ message: `Hello, ${req.user.username}` });
