@@ -127,10 +127,7 @@ function CalendarPage() {
             className="draggable-plan"
             key={idx}
             draggable
-
             onDragStart={() => handleDragStart(plan)}
-            
-
             >
               <b style={{fontSize: '30px'}}>{plan.name}</b>
               <p>

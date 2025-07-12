@@ -19,6 +19,24 @@ function PlanBuilder() {
   const [customReps, setCustomReps] = useState("");
   const [customWeight, setCustomWeight] = useState("");
 
+  const [plans, setPlans] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/plans', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
+      .then(res => res.json())
+      .then(setPlans);
+  }, []);
+  
+  // const refreshPlans = () => {
+  //   fetch('http://localhost:8000/api/plans', {
+  //     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  //   })
+  //     .then(res => res.json())
+  //     .then(setPlans);
+  // };
+
   // const [username, setUsername] = useState(localStorage.getItem('username') || '');
 
   const handleSearch = async () => {
@@ -41,7 +59,9 @@ function PlanBuilder() {
   };
 
   return (
+    <>
     <div className='workout-plan'>
+
 
       <div className='left'>
         <div className='plan'>
@@ -86,6 +106,7 @@ function PlanBuilder() {
         </button>
       </div>
 
+
       <div className="right">
         
           <form onSubmit={e => {
@@ -106,7 +127,6 @@ function PlanBuilder() {
         }}
         className='add-to-plan'
         >
-
           <input value={customName} onChange={e => setCustomName(e.target.value)} placeholder="Exercise Name" required />
           <input value={customMuscle} onChange={e => setCustomMuscle(e.target.value)} placeholder="Muscle Group" required />
           {/* <input value={customSets} onChange={e => setCustomSets(e.target.value)} placeholder="Sets" type="number" required />
@@ -136,6 +156,27 @@ function PlanBuilder() {
         </div>
       </div>
     </div>
+
+
+    <div className='bottom'>
+      <h3 style={{fontSize: '30px'}}>Your Saved Workout Plans</h3>
+      {plans.map((plan, idx) => (
+          <div 
+            className="saved-plans"
+            // key={idx}
+            // draggable
+            // onDragStart={() => handleDragStart(plan)}
+            >
+              <b style={{fontSize: '25px'}}>{plan.name}</b>
+              <p>
+                {plan.exercises.map((ex, i) => (
+                  <p className= 'saved-plan' key={i}> {ex.name} ({ex.muscle})</p>
+                ))}
+              </p>
+          </div>
+        ))}
+    </div>
+    </>
   )
 }
 
