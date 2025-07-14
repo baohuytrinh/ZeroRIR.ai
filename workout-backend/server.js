@@ -44,6 +44,16 @@ app.get('/api/workouts', authMiddleware, async (req, res) => {
     res.json(filtered);
 });
 
+app.delete('/api/workouts', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+    const { name, muscle, sets, reps, weight } = req.body;
+    const result = await workoutsCollection.deleteOne({ username, name, muscle, sets, reps, weight});
+    if (result.deleteCount === 0) {
+        return res.status(404).json({error: "Workout not found"});
+    }
+    res.json({ message: "Workout deleted"});
+});
+
 //plan
 app.post('/api/plans', authMiddleware, async (req, res) => {
     const username = req.user.username; 
@@ -63,6 +73,16 @@ app.get('/api/plans', authMiddleware, async (req, res) => {
             ({name: ex.name, muscle: ex.muscle})) 
         }));
     res.json(filtered);
+});
+
+app.delete('/api/plans', authMiddleware, async (req, res) => {
+    const username = req.user.username;
+    const { name } = req.body;
+    const result = await workoutsCollection.deleteOne({ username, name });
+    if (result.deleteCount === 0) {
+        return res.status(404).json({error: "Plan not found"});
+    }
+    res.json({ message: "Plan deleted"});
 });
 
 //calendar

@@ -15,6 +15,8 @@ export const searchExercises = async (muscle) => {
 };
 
 //backend
+
+//workout
 export const addWorkout = async (workout) => {
     const response = await fetch('http://localhost:8000/api/workouts', {
         method: 'POST',
@@ -24,6 +26,17 @@ export const addWorkout = async (workout) => {
     return response.json();
 };
 
+export const deleteWorkout = async (workout) => {
+    const response = await fetch('http://localhost:8000/api/workouts', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json', ...getAuthHeaders()},
+      body: JSON.stringify(workout)
+    });
+    return response.json();
+};
+
+
+//plan
 export const createWorkoutPlan = async (plan) => {
     const response = await fetch('http://localhost:8000/api/plans', {
       method: 'POST',
@@ -33,6 +46,17 @@ export const createWorkoutPlan = async (plan) => {
     return response.json();
 };
 
+export const deletePlan = async (name) => {
+  const response = await fetch('http://localhost:8000/api/plans', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json', ...getAuthHeaders()},
+    body: JSON.stringify({name})
+  });
+  return response.json();
+};
+
+
+//auth
 const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
     return token ? { Authorization: `Bearer ${token}` } : {};
