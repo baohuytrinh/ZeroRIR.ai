@@ -155,7 +155,7 @@ function PlanBuilder() {
           </ul>
         </div>
       </div>
-    </div>
+    </div>l
 
 
     <div className='bottom'>
@@ -173,7 +173,7 @@ function PlanBuilder() {
                   <p className= 'saved-plan' key={i}> {ex.name} ({ex.muscle})</p>
                 ))}
               </p>
-              <button className="rmv-workout-btn" onClick={async () => {
+              <button className="rmv-plan-btn" onClick={async () => {
                 await deletePlan(plan.name);
                 setPlans(plans.filter((_, i) => i !== idx));
                 }}

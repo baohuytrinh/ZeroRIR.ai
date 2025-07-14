@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import {deleteWorkout} from "../services/api.js"
 
 function Workouts(){
 
@@ -42,6 +42,10 @@ function Workouts(){
                             <p key={idx} className="workout-num">
                              ({w.sets}x{w.reps}) -{'>'} {w.weight} lbs
                             </p>
+                            <button className="rmv-workouts-btn" onClick={async () => {
+                                await deleteWorkout(w);
+                                setWorkouts(workouts.filter((_,i) => i !== idx));
+                            }}>Remove</button>
                         </div>
                     ))}
                     </p>
