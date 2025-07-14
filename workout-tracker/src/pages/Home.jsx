@@ -2,6 +2,7 @@ import {useState, useEffect, useCallback } from "react"
 import ExerciseTab from "../components/exercise";
 import '../css/home.css'
 import { searchExercises } from "../services/api.js";
+import { Link } from "react-router-dom";
 
 
 function debounce(fn, delay) {
@@ -129,8 +130,10 @@ function Home(){
                     </div>
                 </div> 
 
-                <div className="textbox">
-                    <p>e.g. Dumbbell Bicep Curl</p>
+                <div className="textbox" style={{padding: '0 2rem 0 0', display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+                    <p style={{textAlign: 'start', paddingLeft: '1rem'}}> {'>'} e.g. Dumbbell Bicep Curl</p>
+                    <p style={{textAlign: 'start', paddingLeft: '1rem'}}> {'>'} <Link to='/workouts' className='nav-link'>workouts</Link> {'->'} see your added exercises</p>
+                    <p style={{textAlign: 'start', paddingLeft: '1rem'}}> {'>'} <Link to='/planBuilder' className='nav-link'>plans</Link> {'->'} add multiple exercises at once</p>
                 </div>
             </div>
             

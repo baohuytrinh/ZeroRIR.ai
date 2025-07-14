@@ -35,18 +35,25 @@ function Workouts(){
                     <h2>Your Workout(s)</h2>
                     <p>
                     {workouts.map((w, idx) => (
-                        <div className="workout-fetched">
-                            <p key={idx} className="workout-name">
-                                {w.name} ({w.muscle})  
-                            </p>
-                            <p key={idx} className="workout-num">
-                             ({w.sets}x{w.reps}) -{'>'} {w.weight} lbs
-                            </p>
-                            <button className="rmv-workouts-btn" onClick={async () => {
+                        <>
+                        <div style={{marginBottom: '1.5rem'}}>
+                            <div className="workout-fetched">
+                                <p key={idx} className="workout-name">
+                                    {w.name} ({w.muscle})  
+                                </p>
+                                <p key={idx} className="workout-num">
+                                ({w.sets}x{w.reps}) -{'>'} {w.weight} lbs
+                                </p>
+                                
+                            </div>
+                            <button 
+                            className="rmv-workouts-btn" 
+                            onClick={async () => {
                                 await deleteWorkout(w);
-                                setWorkouts(workouts.filter((_,i) => i !== idx));
-                            }}>Remove</button>
+                                setWorkouts(workouts.filter((_,i) => i !== idx));}}
+                            >Delete</button>
                         </div>
+                        </>
                     ))}
                     </p>
                 </div>
