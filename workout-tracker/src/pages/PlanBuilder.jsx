@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/PlanBuilder.css'
 import { useState, useEffect, useCallback } from 'react';
-import { searchExercises, createWorkoutPlan } from "../services/api.js";
+import { searchExercises, createWorkoutPlan, deletePlan } from "../services/api.js";
 import ExerciseTab from "../components/exercise";
 
 function PlanBuilder() {
@@ -166,13 +166,20 @@ function PlanBuilder() {
             // key={idx}
             // draggable
             // onDragStart={() => handleDragStart(plan)}
-            >
+          >
               <b style={{fontSize: '25px'}}>{plan.name}</b>
               <p>
                 {plan.exercises.map((ex, i) => (
                   <p className= 'saved-plan' key={i}> {ex.name} ({ex.muscle})</p>
                 ))}
               </p>
+              <button className="rmv-workout-btn" onClick={async () => {
+                await deletePlan(plan.name);
+                setPlans(plans.filter((_, i) => i !== idx));
+                }}
+              >
+                Remove
+              </button>
           </div>
         ))}
     </div>

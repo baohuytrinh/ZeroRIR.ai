@@ -48,7 +48,7 @@ app.delete('/api/workouts', authMiddleware, async (req, res) => {
     const username = req.user.username;
     const { name, muscle, sets, reps, weight } = req.body;
     const result = await workoutsCollection.deleteOne({ username, name, muscle, sets, reps, weight});
-    if (result.deleteCount === 0) {
+    if (result.deletedCount === 0) {
         return res.status(404).json({error: "Workout not found"});
     }
     res.json({ message: "Workout deleted"});
@@ -78,8 +78,8 @@ app.get('/api/plans', authMiddleware, async (req, res) => {
 app.delete('/api/plans', authMiddleware, async (req, res) => {
     const username = req.user.username;
     const { name } = req.body;
-    const result = await workoutsCollection.deleteOne({ username, name });
-    if (result.deleteCount === 0) {
+    const result = await plansCollection.deleteOne({ username, name });
+    if (result.deletedCount === 0) {
         return res.status(404).json({error: "Plan not found"});
     }
     res.json({ message: "Plan deleted"});
