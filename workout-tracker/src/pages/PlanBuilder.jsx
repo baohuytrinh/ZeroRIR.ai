@@ -66,18 +66,19 @@ function PlanBuilder() {
       <div className='left'>
         <div className='plan'>
           <div className='plan-name'>
-            <h3>Current Plan: {planName || "(No name yet)"}</h3>
+            <h3>Current Plan:<br />{planName || "(No name yet)"}</h3>
             <input
               type="text"
               placeholder="Plan Name"
               value={planName}
               onChange={e => setPlanName(e.target.value)}
+              maxLength={15}
             />
           </div>
           <ul className='added'>
             {planExercises.map((ex, i) => (
               <p className='each-added' key={i}>
-                {ex.name} ({ex.muscle})
+                - {ex.name} ({ex.muscle})
                 <button onClick={() => setPlanExercises(planExercises.filter((_, idx) => idx !== i))}>
                   Remove
                 </button>
@@ -108,8 +109,8 @@ function PlanBuilder() {
 
 
       <div className="right">
-        
-          <form onSubmit={e => {
+        <h1>Add/Search for exercises!</h1>
+        <form onSubmit={e => {
           e.preventDefault();
           addToPlan({
             name: customName,
@@ -155,33 +156,37 @@ function PlanBuilder() {
           </ul>
         </div>
       </div>
-    </div>l
+    </div>
 
 
     <div className='bottom'>
-      <h3 style={{fontSize: '30px'}}>Your Saved Workout Plans</h3>
-      {plans.map((plan, idx) => (
-          <div 
-            className="saved-plans"
-            // key={idx}
-            // draggable
-            // onDragStart={() => handleDragStart(plan)}
-          >
-              <b style={{fontSize: '25px'}}>{plan.name}</b>
-              <p>
-                {plan.exercises.map((ex, i) => (
-                  <p className= 'saved-plan' key={i}> {ex.name} ({ex.muscle})</p>
-                ))}
-              </p>
-              <button className="rmv-plan-btn" onClick={async () => {
-                await deletePlan(plan.name);
-                setPlans(plans.filter((_, i) => i !== idx));
-                }}
-              >
-                Remove
-              </button>
-          </div>
-        ))}
+      <h3 >Your Saved Workout Plans</h3>
+      <div className='plans'>
+        {plans.map((plan, idx) => (
+            <div 
+              className="saved-plan"
+              // key={idx}
+              // draggable
+              // onDragStart={() => handleDragStart(plan)}
+              
+            >
+                <b className='plan-name'>{plan.name}</b>
+
+                <p className='plan-exercises'>
+                  {plan.exercises.map((ex, i) => (
+                    <p className= '' key={i} > - {ex.name}</p>
+                  ))}
+                </p>
+
+                <button className="rmv-plan-btn" onClick={async () => {
+                  await deletePlan(plan.name);
+                  setPlans(plans.filter((_, i) => i !== idx));
+                  }}
+                >Delete</button>
+
+            </div>
+          ))}
+        </div>
     </div>
     </>
   )

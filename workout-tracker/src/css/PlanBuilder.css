@@ -1,31 +1,32 @@
 .workout-plan {
-    border: 1px solid green;
+    /* border: 1px solid green; */
     padding: 4rem;
     margin-top: -7rem;
     display: flex;
     justify-content: center;
-    gap: 7rem;
+    gap: 2rem;
     width: 1150px;
 }
 
 .workout-plan .left {
-
+    border: 1px solid white;
+    border-radius: 2rem;
 }
 
 .workout-plan .left .plan {
-    border: 1px solid red;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    width: 500px;
 }
 
 .workout-plan .left .plan .plan-name {
-    border: 2px teal solid;
+    /* border: 2px teal solid; */
 }
 
 .workout-plan .left .plan .plan-name h3{
-    border: 2px rgb(255, 255, 255) solid;
+    /* border: 2px rgb(255, 255, 255) solid; */
 
     font-size: 35px;
     font-weight: 1000;
@@ -33,11 +34,11 @@
 }
 
 .workout-plan .left .plan .plan-name input{
-    border: 2px rgb(255, 255, 255) solid;
+
 }
 
 .workout-plan .left .plan .added{
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,23 +46,26 @@
 }
 
 .workout-plan .left .plan .each-added{
-    border: 1px solid rgb(0, 217, 255);
+    /* border: 1px solid rgb(0, 217, 255); */
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-left: -40px;
-    
+    padding-left: 2rem;
     width: 500px;
 }
 
-.workout-plan .left .plan .each-added button{}
+.workout-plan .left .plan .each-added button{
+    margin: auto auto 0 auto;
+}
 
 .workout-plan .left .plan .each-added button:hover{
     transform: scale(1.1);
+    
 }
 
 .workout-plan .left .create-plan-btn {
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
 
 }
 
@@ -72,24 +76,25 @@
 
 
 .workout-plan .right{
-    
-    
+    margin-top: 2rem;
+    border: 1px solid white;
+    border-radius: 2rem;
+    padding: 2rem;
 }
 
 .workout-plan .right .add-to-plan{
-    border: 1px solid pink;
+    /* border: 1px solid pink; */
 
     margin-bottom: 3rem;
 
 }
 
 .workout-plan .right .search {
-    border: 1px solid yellow;
-
+    /* border: 1px solid yellow; */
 }
 
 .workout-plan .right .search .searched-results{
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -100,5 +105,49 @@
 }
 
 .workout-plan .right .search .searched-results button:hover{
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+.bottom {   
+    margin-top: 3rem;
+}
+
+.bottom h3{
+    font-size: xxx-large;
+}
+
+.bottom .plans{
+    width: 1000px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.bottom .plans .saved-plan{
+    background: radial-gradient(ellipse at top, #122946 0%, #10111a 100%);    
+    flex-direction: column;
+    display: flex;
+    border: 2px solid white;
+    border-radius: 2rem;
+}
+.bottom .plans .saved-plan:hover{
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.bottom .plans .saved-plan .plan-name{
+    font-size: x-large;
+}
+
+.bottom .plans .saved-plan .plan-exercises{
+    text-align: left;
+    padding-left: 1rem;
+}
+
+.bottom .plans .saved-plan .rmv-plan-btn {
+    margin: auto auto 1rem auto;    
+    width: 5rem;
+    justify-content: center;
+    display: flex;
 }
