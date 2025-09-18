@@ -9,7 +9,7 @@
 }
 
 .workouts .workouts-empty {
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
 }
 
 .workouts .workouts-chart {
@@ -29,7 +29,7 @@
     border-radius: 2rem;
 
 
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     font-weight: bold;
     font-size: 30px;
@@ -46,7 +46,6 @@
     height: 55px;
     
     align-items: center;
-    margin-bottom: 0rem;
 
     border: 1px solid rgb(230, 230, 230);
     border-radius: 2rem;
@@ -96,7 +95,6 @@
     width: 4rem;
     height: 1.5rem;
     background: radial-gradient(ellipse at top, #122946 0%, #10111a 100%);
-    
 }
 
 .workouts .workouts-chart .rmv-workouts-btn:hover {

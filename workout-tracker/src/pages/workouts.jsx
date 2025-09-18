@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import {deleteWorkout} from "../services/api.js"
+import { Link } from "react-router-dom";
 
 function Workouts(){
 
@@ -28,7 +29,7 @@ function Workouts(){
             {workouts.length === 0 ?  (
                 <div className="workouts-empty">
                     <h2>No workouts yet</h2>
-                    <p>start adding workouts, and they'll appear here</p>
+                    <p>start adding workouts at the <Link to='/'>home</Link> page</p>
                 </div>
             ) : (
                 <div className="workouts-chart">
@@ -36,7 +37,7 @@ function Workouts(){
                     <p>
                     {workouts.map((w, idx) => (
                         <>
-                        <div style={{marginBottom: '1.5rem'}}>
+                        <div style={{marginBottom: '1rem'}}>
                             <div className="workout-fetched">
                                 <p key={idx} className="workout-name">
                                     {w.name} ({w.muscle})  
