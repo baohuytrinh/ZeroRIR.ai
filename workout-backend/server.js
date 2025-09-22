@@ -176,7 +176,7 @@ app.post('/api/ai', authMiddleware, async (req, res) => {
         `;
 
         const fullPrompt = `
-        You are a helpful fitness assistant. Here is information about the user:
+        You are a helpful fitness assistant. Don't be too detailed, but give the user enough information to work with and doesn't overflow the set limit tokens of roughly 400 tokens. Here is information about the user:
         ${userData}
         Now answer the user's question: ${prompt}`
 
@@ -189,7 +189,7 @@ app.post('/api/ai', authMiddleware, async (req, res) => {
             body: JSON.stringify({
                 model: "gpt-4.1",
                 messages: [{ role: "user", content: fullPrompt }],
-                max_tokens: 150
+                max_tokens: 400
             })
         });
         const data = await openaiRes.json();
