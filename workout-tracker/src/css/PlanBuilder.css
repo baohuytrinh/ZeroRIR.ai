@@ -1,11 +1,11 @@
 .workout-plan {
     /* border: 1px solid green; */
     padding: 4rem;
-    margin-top: -7rem;
+    margin-top: 0rem;
     display: flex;
     justify-content: center;
     gap: 2rem;
-    width: 1150px;
+    width: 500; 
 }
 
 .workout-plan .left {
@@ -34,7 +34,10 @@
 }
 
 .workout-plan .left .plan .plan-name input{
-
+    background: none;
+    border: 1px white solid;
+    padding: .5rem;
+    border-radius: 1rem;
 }
 
 .workout-plan .left .plan .added{
@@ -66,7 +69,21 @@
 
 .workout-plan .left .create-plan-btn {
     /* border: 1px solid purple; */
+    background: none;
+    border: 1px white solid;
+    border-radius: 1rem;    
+    font-size: x-small;
 
+}
+
+.workout-plan .left .create-plan-btn:hover {
+    cursor: pointer;
+}
+
+.workout-plan .left .create-plan-btn:active {
+    background-color: #122946;
+    border: none;
+    transition: .3s ease all;
 }
 
 .workout-plan .left .create-plan-btn:hover{
@@ -84,13 +101,70 @@
 
 .workout-plan .right .add-to-plan{
     /* border: 1px solid pink; */
-
     margin-bottom: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
 
+.workout-plan .right .add-to-plan .x-name{
+    background: none;
+    border: 1px solid white;
+    padding: .5rem;
+    border-radius: 1rem;
+}
+
+.workout-plan .right .add-to-plan .x-muscle{
+    background: none;
+    border: 1px solid white;
+    padding: .5rem;
+    border-radius: 1rem;
+}
+
+.workout-plan .right .add-to-plan .x-submit{
+    font-size:x-small;
+    background: none;
+    border: 1px solid white;
+    border-radius: 1rem;
+}
+
+.workout-plan .right .add-to-plan .x-submit:hover{
+    cursor: pointer;
+}
+
+.workout-plan .right .add-to-plan .x-submit:active{
+    background-color: #214167;
+    transition: all .1s ease;
+    border: none;
 }
 
 .workout-plan .right .search {
-    /* border: 1px solid yellow; */
+}
+
+.workout-plan .right .search .searchbar {
+    background: none;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: .5rem;
+    margin-right: 1rem;
+}
+
+.workout-plan .right .search .search-btn {
+    background: none;
+    border: 1px solid white;
+    border-radius: 1rem;
+    font-size: x-small;
+}
+
+.workout-plan .right .search .search-btn:hover {
+    cursor: pointer;
+}
+
+.workout-plan .right .search .search-btn:active {
+    background-color: #122946;
+    transition: all .1s ease;
+    border: none;
+
 }
 
 .workout-plan .right .search .searched-results{
@@ -107,6 +181,10 @@
 .workout-plan .right .search .searched-results button:hover{
     transform: scale(1.05);
 }
+
+
+/* BOTTOM */
+
 
 .bottom {   
     margin-top: 3rem;
@@ -138,16 +216,32 @@
 
 .bottom .plans .saved-plan .plan-name{
     font-size: x-large;
+    border-bottom: 1px dashed rgb(227, 226, 219);
+    width: fit-content;
+    margin: 0 auto 0;
+    
 }
 
 .bottom .plans .saved-plan .plan-exercises{
     text-align: left;
-    padding-left: 1rem;
+    padding: 0 1rem 0 1rem;
+
 }
 
 .bottom .plans .saved-plan .rmv-plan-btn {
-    margin: auto auto 1rem auto;    
+    margin: auto auto 0 auto;    
     width: 5rem;
     justify-content: center;
     display: flex;
+    background-color:#122946;
+    border: 1px solid white;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    border-bottom: none;
+}
+
+.bottom .plans .saved-plan .rmv-plan-btn:hover {
+    cursor: pointer;
+    background-color: #214167;
+    transition: all ease .2s;
 }

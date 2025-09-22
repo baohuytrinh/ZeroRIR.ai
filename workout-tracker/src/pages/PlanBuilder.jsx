@@ -60,13 +60,17 @@ function PlanBuilder() {
 
   return (
     <>
+    <h1 style={{marginTop: '-5rem', display:'flex', justifyContent:'center'}}>
+        Create a workout plan for each day of the week!
+    </h1>
     <div className='workout-plan'>
-
+      
 
       <div className='left'>
         <div className='plan'>
           <div className='plan-name'>
-            <h3>Current Plan:<br />{planName || "(No name yet)"}</h3>
+            <h3>Current Plan</h3>
+              <h4 style={{fontSize:'20px'}}>{planName || "(No name yet)"}</h4>
             <input
               type="text"
               placeholder="Plan Name"
@@ -128,22 +132,23 @@ function PlanBuilder() {
         }}
         className='add-to-plan'
         >
-          <input value={customName} onChange={e => setCustomName(e.target.value)} placeholder="Exercise Name" required />
-          <input value={customMuscle} onChange={e => setCustomMuscle(e.target.value)} placeholder="Muscle Group" required />
+          <input className='x-name' value={customName} onChange={e => setCustomName(e.target.value)} placeholder="Exercise Name" required />
+          <input className='x-muscle' value={customMuscle} onChange={e => setCustomMuscle(e.target.value)} placeholder="Muscle Group" required />
           {/* <input value={customSets} onChange={e => setCustomSets(e.target.value)} placeholder="Sets" type="number" required />
           <input value={customReps} onChange={e => setCustomReps(e.target.value)} placeholder="Reps" type="number" required />
           <input value={customWeight} onChange={e => setCustomWeight(e.target.value)} placeholder="Weight" type="number" required /> */}
-          <button type="submit">Add Custom Exercise</button>
+          <button className='x-submit' type="submit">Add Custom Exercise</button>
         </form>
 
 
         <div className='search'>
           <input
+            className='searchbar'
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Search for exercises..."
           />
-          <button onClick={handleSearch}>Search</button>
+          <button className='search-btn' onClick={handleSearch}>Search</button>
           {loading && <div>Loading...</div>}
           {error && <div>{error}</div>}
           <ul>
@@ -170,7 +175,7 @@ function PlanBuilder() {
               // onDragStart={() => handleDragStart(plan)}
               
             >
-                <b className='plan-name'>{plan.name}</b>
+                <b className='plan-name' style={{paddingTop: '.5rem'}}>{plan.name}</b>
 
                 <p className='plan-exercises'>
                   {plan.exercises.map((ex, i) => (
