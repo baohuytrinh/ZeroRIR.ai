@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: workout-backend
+    env: node
+    buildCommand: cd workout-backend && npm install
+    startCommand: cd workout-backend && node server.js
+    envVars:
+      - key: MONGODB_URI
+        fromDatabase:
+          name: workout-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: openAI_API_KEY
+        sync: false
+    plan: free
+
+  - type: web
+    name: workout-frontend
+    env: static
+    buildCommand: cd workout-tracker && npm install && npm run build
+    staticPublishPath: ./workout-tracker/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://workout-backend.onrender.com
+    plan: free
+
+databases:
+  - name: workout-db
+    plan: free
+    databaseName: workout_tracker

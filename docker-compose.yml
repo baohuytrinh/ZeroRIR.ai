@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  workout-backend:
+    build: ./workout-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - openAI_API_KEY=${openAI_API_KEY}
+      - PORT=8000
+    networks:
+      - workout-network
+
+  workout-frontend:
+    build: ./workout-tracker
+    ports:
+      - "3000:80"
+    depends_on:
+      - workout-backend
+    networks:
+      - workout-network
+
+networks:
+  workout-network:
+    driver: bridge

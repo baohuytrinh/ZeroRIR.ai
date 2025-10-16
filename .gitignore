@@ -31,3 +31,12 @@ workout-tracker/.env
 workout-backend/.env
 workout-backend/node_modules/
 workout-backend/*.log
+
+# Docker and deployment
+docker-compose.override.yml
+.env.local
+.env.production
+.env.development
+
+# OS generated files
+Thumbs.db
