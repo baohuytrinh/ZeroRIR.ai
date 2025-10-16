@@ -202,7 +202,7 @@ app.post('/api/ai', authMiddleware, async (req, res) => {
             body: JSON.stringify({
                 model: "gpt-5", // 
                 messages: [{ role: "user", content: fullPrompt }],
-                max_tokens: 400
+                max_completion_tokens: 400
             })
         });
         
