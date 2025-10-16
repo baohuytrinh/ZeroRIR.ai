@@ -1,6 +1,6 @@
 import {useState, useEffect, useCallback } from "react"
 import ExerciseTab from "../components/exercise";
-import '../css/home.css'
+import '../css/Home.css'
 import { searchExercises } from "../services/api.js";
 import { Link } from "react-router-dom";
 
