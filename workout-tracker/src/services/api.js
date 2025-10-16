@@ -95,3 +95,20 @@ export const deleteCalendarEvent = async (id) => {
       }});
   return response.json();
 };
+
+
+//charts
+
+export const fetchWorkoutData = async (timeRange = '30') => {
+  const response = await fetch(`http://localhost:8000/api/workouts?range=${timeRange}`, {
+    headers: { ...getAuthHeaders() }
+  });
+  return response.json();
+};
+
+export const fetchProgressData = async (timeRange = '30') => {
+  const response = await fetch(`http://localhost:8000/api/workouts?range=${timeRange}`, {
+    headers: { ...getAuthHeaders() }
+  });
+  return response.json();
+};

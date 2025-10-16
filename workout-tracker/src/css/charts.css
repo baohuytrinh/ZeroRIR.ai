@@ -1,0 +1,131 @@
+.charts-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 5rem auto;
+  }
+  
+  .charts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .charts-header h1 {
+    color: #575ebb;
+    margin: 0;
+  }
+  
+  .time-range-selector select {
+    padding: 8px 12px;
+    border: 1px solid #c4abd8;
+    border-radius: 4px;
+    background: #575ebb;
+  }
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+  }
+  
+  .chart-card {
+    background: rgb(168, 167, 187);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  
+  .chart-card h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.2em;
+  }
+  
+  .chart-wrapper {
+    height: 300px;
+    position: relative;
+  }
+  
+  .charts-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 1.2em;
+    color: #666;
+  }
+  
+  /* 1024px and below */
+  @media (max-width: 1024px) {
+    .charts-container {
+      padding: 15px;
+      margin-top: -5rem;
+    }
+    
+    .charts-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 15px;
+    }
+    
+    .chart-wrapper {
+      height: 250px;
+    }
+  }
+  
+  /* 768px and below */
+  @media (max-width: 768px) {
+    .charts-container {
+      padding: 10px;
+      margin-top: -2rem;
+    }
+    
+    .charts-header {
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .charts-header h1 {
+      font-size: 1.8rem;
+    }
+    
+    .charts-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    .chart-card {
+      padding: 15px;
+    }
+    
+    .chart-wrapper {
+      height: 250px;
+    }
+  }
+  
+  /* 425px and below */
+  @media (max-width: 425px) {
+    .charts-container {
+      padding: 5px;
+      margin-top: 0;
+    }
+    
+    .charts-header h1 {
+      font-size: 1.5rem;
+    }
+    
+    .chart-card {
+      padding: 10px;
+    }
+    
+    .chart-wrapper {
+      height: 200px;
+    }
+    
+    .chart-card h3 {
+      font-size: 1rem;
+    }
+  }
