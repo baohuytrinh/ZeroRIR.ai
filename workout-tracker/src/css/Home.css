@@ -3,28 +3,25 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* border: solid 2px blue; */
-    margin-right: 16rem;
-}
-
-
-.home .enter-exercise {
+    padding: 1rem;
+    margin-bottom: 5rem;
+  }
+  
+  .home .enter-exercise {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    padding: 2rem;;
-
+    padding: 2rem;
     border: 2px solid rgb(170, 165, 230);
-    width: 1200px;
-    background: radial-gradient(ellipse at center, #122946 0%, #10111a 100%);    
+    max-width: 1200px;
+    background: radial-gradient(ellipse at center, #122946 0%, #10111a 100%);
     border-radius: 2rem;
-}
-
-
-
-
-.home .enter-exercise .exercise-name {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .home .enter-exercise .exercise-name {
     width: 30rem;
     height: 5rem;
     font-weight: bold;
@@ -32,159 +29,369 @@
     border-radius: 2rem;
     text-indent: 12px;
     background: transparent;
-    border: 1px solid; 
-}
-
-.home .enter-exercise .exercise-name:focus {
-    transition: ease .7s all;
-    transform: scale(1.025);     
-}
-
-.home .enter-exercise .exercise-muscle {
+    border: 1px solid;
+  }
+  
+  .home .enter-exercise .exercise-muscle {
     width: 20rem;
     height: 4rem;
     font-weight: bold;
     font-size: 20px;
     border-radius: 2rem;
     text-indent: 12px;
-    border: 1px solid; 
-    margin-left: 1rem;
+    border: 1px solid;
     background: transparent;
-}
-
-.home .enter-exercise .exercise-muscle:focus {
-    transition: ease .7s all;
-    transform: scale(1.025);     
-}
-
-
-.home .enter-exercise .exercise-sets {
+  }
+  
+  .home .enter-exercise .exercise-sets,
+  .home .enter-exercise .exercise-reps,
+  .home .enter-exercise .exercise-weight {
     width: 4rem;
     height: 2rem;
     border-radius: 2rem;
     text-indent: 12px;
-    border: 1px solid; 
-    margin-left: 1rem;
+    border: 1px solid;
     background: transparent;
-}
+  }
+  
 
-.home .enter-exercise .exercise-sets:focus {
-    transition: ease .7s all;
-    transform: scale(1.025);     
-}
-
-.home .enter-exercise .exercise-reps {
-    width: 4rem;
-    height: 2rem;
-    border-radius: 2rem;
-    text-indent: 12px;
-    border: 1px solid; 
-    margin-left: 1rem;
-    background: transparent;
-}
-
-.home .enter-exercise .exercise-reps:focus {
-    transition: ease .7s all;
-    transform: scale(1.025);     
-}
-
-.home .enter-exercise .exercise-weight {
+  
+  .home .add-btn {
+    margin-left: auto;
     width: 5rem;
     height: 2rem;
-    border-radius: 2rem;
-    text-indent: 12px;
-    border: 1px solid; 
-    margin-left: 1rem;
-    margin-right: 3px;
-    background: transparent;
-}
-
-.home .enter-exercise .exercise-weight:focus {
-    transition: ease .7s all;
-    transform: scale(1.025);     
-}
-
-.home .enter-exercise .add-btn{
-    margin-left: auto;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
     text-align: center;
     font-weight: bold;
     font-size: 20px;
-    border: 1px solid;
-    background: radial-gradient(ellipse at center, #163761 0%, #17192b 100%);    
+    border: none;
+    background: radial-gradient(ellipse at center, #163761 0%, #17192b 100%);
     margin-left: 2rem;
-}
+  }
+  
+  /* 1024px and below */
+  @media (max-width: 1024px) {
+    .home .enter-exercise {
+      max-width: 900px;
+      padding: 1.5rem;
+    }
+    
+    .home .enter-exercise .exercise-name {
+      width: 25rem;
+      height: 4rem;
+      font-size: 25px;
+    }
+    
+    .home .enter-exercise .exercise-muscle {
+      width: 18rem;
+      height: 3.5rem;
+      font-size: 18px;
+    }
+  }
+  
+  /* 768px and below */
+  @media (max-width: 768px) {
+    .home .enter-exercise {
+      flex-direction: column;
+      max-width: 600px;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    
+    .home .enter-exercise .exercise-name {
+      width: 100%;
+      max-width: 400px;
+      height: 3.5rem;
+      font-size: 20px;
+      margin-left: 0;
+    }
+    
+    .home .enter-exercise .exercise-muscle {
+      width: 100%;
+      max-width: 350px;
+      height: 3rem;
+      font-size: 16px;
+      margin-left: 0;
+    }
+    
+    .home .enter-exercise .exercise-sets,
+    .home .enter-exercise .exercise-reps,
+    .home .enter-exercise .exercise-weight {
+      width: 100%;
+      height: 2.5rem;
+      font-size: 16px;
+    }
+    
+    .home .enter-exercise .exercise-weight {
+      width: 100%;
+    }
+    
+    .home .add-btn {
+      margin-left: 0;
+      width: 5rem;
+      height: 2rem;
+      font-size: 18px;
+    }
+  }
+  
+  /* 425px and below */
+  @media (max-width: 425px) {
+    .home {
+      padding: 0.5rem;
+    }
+    
+    .home .enter-exercise {
+      max-width: 100%;
+      padding: 0.8rem;
+    }
+    
+    .home .enter-exercise .exercise-name {
+      height: 3rem;
+      font-size: 16px;
+    }
+    
+    .home .enter-exercise .exercise-muscle {
+      height: 2.5rem;
+      font-size: 14px;
+    }
+    
+    .home .enter-exercise .exercise-sets,
+    .home .enter-exercise .exercise-reps,
+    .home .enter-exercise .exercise-weight {
+      width: 100%;
+      height: 2rem;
+      font-size: 14px;
+    }
+    
+    .home .enter-exercise .exercise-weight {
+      width: 100%;
+    }
+    
+    .home .add-btn {
+      width: 4rem;
+      height: 2rem;
+      font-size: 16px;
+    }
+  }
+  
+  .home .search {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    margin-top: 2rem;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Remove the blue border */
+  }
+  
+  .home .search .searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .home .search .searchbar .search-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    border: 2px solid rgb(170, 165, 230);
+    background: radial-gradient(ellipse at center, #153357 0%, #131420 100%);
+    border-radius: 2rem;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 2rem 0 1rem 0;
+    text-align: center;
+  }
+  
+  .home .search .textbox {
+    font-weight: bold;
+    font-size: 20px;
+    border: solid 2px rgb(170, 165, 230);
+    border-radius: 2rem;
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    margin: 2rem 0 0 0;
+    background: radial-gradient(ellipse at bottom, #153357 0%, #131420 100%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  /* 1024px and below */
+  @media (max-width: 1024px) {
+    .home .search {
+      gap: 1rem;
+      max-width: 900px;
+    }
+    
+    .home .search .searchbar .search-input {
+      max-width: 350px;
+      padding: 1.5rem;
+      font-size: 18px;
+    }
+    
+    .home .search .textbox {
+      max-width: 350px;
+      height: 250px;
+      font-size: 18px;
+    }
+  }
+  
+  /* 768px and below */
+  @media (max-width: 768px) {
+    .home .search {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+    }
+    
+    .home .search .searchbar {
+      width: 100%;
+      max-width: 500px;
+    }
+    
+    .home .search .searchbar .search-input {
+      width: 100%;
+      max-width: 400px;
+      padding: 1rem;
+      font-size: 16px;
+      margin: 1rem 0;
+    }
+    
+    .home .search .textbox {
+      width: 100%;
+      max-width: 400px;
+      height: 200px;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+  
+  /* 425px and below */
+  @media (max-width: 425px) {
+    .home .search {
+      width: 100%;
+      padding: 0 rem;
+    }
+    
+    .home .search .searchbar .search-input {
+      width: 100%;
+      max-width: 300px;
+      padding: 0.8rem;
+      font-size: 14px;
+    }
+    
+    .home .search .textbox {
+      width: 100%;
+      max-width: 300px;
+      height: 150px;
+      font-size: 14px;
+    }
+  }
 
-.home .enter-exercise .add-btn:hover{
+  .weight-label {
+    color: white;
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  
+  /* Loading and error message styling */
+  .loading-message {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196F3;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  .error-message {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  /* Exercise grid styling */
+  .exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+  
+  /* Instruction text styling */
+  .instruction-text {
+    text-align: start;
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Focus effects for inputs */
+  .home .enter-exercise .exercise-name:focus,
+  .home .enter-exercise .exercise-muscle:focus,
+  .home .enter-exercise .exercise-sets:focus,
+  .home .enter-exercise .exercise-reps:focus,
+  .home .enter-exercise .exercise-weight:focus {
+    transition: ease .7s all;
+    transform: scale(1.025);     
+  }
+  
+  .home .add-btn:hover {
     transition: .3s ease all;
     transform: scale(1.05);
     color: #4b86ce;
-}
-
-.home .enter-exercise .add-btn:hover:active{
+  }
+  
+  .home .add-btn:hover:active {
     transition: .1s ease all;
     transform: scale(1.15);
     background-color: bisque;
     color: rgb(255, 255, 255);
-}
-
-
-/* search */
-
-.home .search {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-
-.home .search .searchbar {
-    display: flex;
-    justify-content: top;
-    flex-direction: column;
-}
-
-.home .search .searchbar .search-input {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    text-align: center;
-    padding: 2rem;
-    
-
-    border: 2px solid rgb(170, 165, 230);
-    width: 400px;
-    background: radial-gradient(ellipse at center, #153357 0%, #131420 100%);    border-radius: 2rem;
-    border-radius: 2rem;
-    
-    font-size: 20px;
-    font-weight: bold;
-    
-    margin: 2rem 2rem 0 2rem;
-
-    
-}
-
-.home .search .searchbar .search-input:focus {
+  }
+  
+  .home .search .searchbar .search-input:focus {
     transition: ease .7s all;
     transform: scale(1.1);
-}
-
-
-.home .search .textbox {
+  }
+  
+  /* Nav link styling within textbox */
+  .textbox .nav-link {
+    color: #4b86ce;
+    text-decoration: none;
     font-weight: bold;
-    font-size: 20px;
-    border: solid 2px rgb(170, 165, 230);
-    
-    border-radius: 2rem;
-    width: 300px;
-    height: 300px;
-    margin: 2rem auto auto 2rem;
-    background: radial-gradient(ellipse at bottom, #153357 0%, #131420 100%);    border-radius: 2rem;
-    text-align: center;
-    /* padding-left: 20px; */
-
-
-}
+  }
+  
+  .textbox .nav-link:hover {
+    color: #2196F3;
+    text-decoration: underline;
+  }
+  
+  /* Responsive updates for exercise grid */
+  @media (max-width: 768px) {
+    .exercise-grid {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 425px) {
+    .exercise-grid {
+      padding: 0.5rem;
+    }
+  }
