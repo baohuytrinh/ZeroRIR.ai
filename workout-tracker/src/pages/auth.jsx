@@ -5,6 +5,7 @@ export default function Auth({ onAuth }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [messageType, setMessageType] = useState('error')
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,8 +25,10 @@ export default function Auth({ onAuth }) {
       } else {
         setMode('login');
         setError('Registered! Please log in.');
+        setMessageType('success')
       }
     } catch (err) {
+      setMessageType('error');
       setError(err.message);
     }
   };
@@ -39,10 +42,10 @@ export default function Auth({ onAuth }) {
         <button type="submit" style={{ marginTop: 10, width: 80, justifyContent: 'center', display: 'flex'}}>{mode === 'login' ? 'Login' : 'Register'}</button>
       </form>
       <button onClick={() => setMode(mode === 'login' ? 'register' : 'login')} style={{ marginTop: 10 }}>
-        {mode === 'login' ? 'Need an account? Register here' : 'Have an account? Login here '}
+        {mode === 'login' ? (<>Need an account? <br /> Register here</>):(<>Have an account? <br />Login here</>)}
       </button>
-      {error && <div style={{ color: 'red', marginTop: 10 }}>{error}</div>}
-    </div>
+      {error && <div style={{color: messageType === 'success' ? 'green' : 'red', marginTop: 10}}>{error}</div>}
+      </div>
   );
 }
 

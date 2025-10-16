@@ -2,104 +2,138 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-
     justify-content: center;
     text-align: center;
-    
-}
-
-.workouts .workouts-empty {
-    /* border: 2px solid blue; */
-}
-
-.workouts .workouts-chart {
-    /* border: 2px solid rgb(15, 207, 124); */
-
-    margin-top: -5rem;
-    width: 1000px;
+    padding: 1rem;
+    margin-bottom: 5rem;
+  }
+  
+  .workouts .workouts-chart {
+    margin-top: -2rem;
+    width: 100%;
+    max-width: 1000px;
     align-items: center;
     display: flex;
     flex-direction: column;
-    
-    
-}
+  }
 
-.workouts .workouts-chart h2 {
-    border: 1px solid rgb(194, 194, 194);
+
+  
+  .workouts .workouts-chart h2 {
     border-radius: 2rem;
-
-
     margin-bottom: 1rem;
-
     font-weight: bold;
     font-size: 30px;
-    padding: 3rem;
     width: 400px;
-
-    background: radial-gradient(ellipse at top, #122946 0%, #10111a 100%);    
-}
-
-.workouts .workouts-chart .workout-fetched {
+    display: flex;
+    justify-content: center;
+    color: #575ebb;
+  }
+  
+  .workouts .workouts-chart .workout-fetched {
     display: flex;
     justify-content: space-between;
-    width: auto;
+    max-width: 800px;
     height: 55px;
-    
     align-items: center;
-
     border: 1px solid rgb(230, 230, 230);
     border-radius: 2rem;
-
-    background: radial-gradient(ellipse at left, #122946 0%, #10111a 100%);    
-
-}
-
-.workouts .workouts-chart .workout-fetched:hover{
-    transition: .3s ease all;
-    transform: scale(1.03);
-}
-
-
-.workouts .workouts-chart .workout-fetched .workout-name {
-    /* border: 2px solid blue; */
-
-    /* border-radius: 1rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    */
-   
-    
+    background: radial-gradient(ellipse at left, #122946 0%, #10111a 100%);
+  }
+  
+  .workouts .workouts-chart .workout-fetched .workout-name {
     margin: 2rem;
-    
-    
-
     font-weight: bold;
     font-size: 18px;
-}
-
-.workouts .workouts-chart .workout-fetched .workout-num {
-    /* border: 2px solid brown; */
-
-
+  }
+  
+  .workouts .workouts-chart .workout-fetched .workout-num {
     padding-right: 1rem;
     font-weight: bold;
     font-size: 18px;
-}
-
-.workouts .workouts-chart .rmv-workouts-btn {
+  }
+  
+  .workouts .workouts-chart .rmv-workouts-btn {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border: none;
     width: 4rem;
     height: 1.5rem;
     background: radial-gradient(ellipse at top, #122946 0%, #10111a 100%);
-}
-
-.workouts .workouts-chart .rmv-workouts-btn:hover {
-    transition: .3s ease all;
-    background:  #1c2144 ;
-
+  }
+  
+  /* 1024px and below */
+  @media (max-width: 1024px) {
+    .workouts .workouts-chart {
+      max-width: 900px;
+      
+    }
     
-}
+    .workouts .workouts-chart h2 {
+      width: 350px;
+      padding: 2rem;
+      font-size: 25px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
+  /* 768px and below */
+  @media (max-width: 768px) {
+    .workouts {
+      padding: 0.5rem;
+    }
+    
+    .workouts .workouts-chart {
+      margin-top: 0;
+    }
+    
+    .workouts .workouts-chart h2 {
+      width: 100%;
+      max-width: 300px;
+      padding: 1.5rem;
+      font-size: 20px;
+      justify-content: center;
+      display: flex;
+    }
+    
+    .workouts .workouts-chart .workout-fetched {
+      max-width: 100%;
+      height: auto;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 0.5rem;
+    }
+    
+    .workouts .workouts-chart .workout-fetched .workout-name {
+      margin: 0;
+      font-size: 16px;
+      text-align: center;
+    }
+    
+    .workouts .workouts-chart .workout-fetched .workout-num {
+      padding: 0;
+      font-size: 16px;
+    }
+    
+    .workouts .workouts-chart .rmv-workouts-btn {
+      height: 2rem;
+      border-radius: 1rem;
+    }
+  }
+  
+  /* 425px and below */
+  @media (max-width: 425px) {
+    .workouts .workouts-chart h2 {
+      font-size: 18px;
+      padding: 1rem;
+    }
+    
+    .workouts .workouts-chart .workout-fetched .workout-name {
+      font-size: 14px;
+    }
+    
+    .workouts .workouts-chart .workout-fetched .workout-num {
+      font-size: 14px;
+    }
+  }
