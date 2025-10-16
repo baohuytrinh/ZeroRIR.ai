@@ -1,3 +1,7 @@
+app ->
+    - checklist for exercises finished
+    - for each plan, allow a separate tab to be opened. DnD exercises for desired order
+
 calendar -> 
     - allow drag/drop outside of calendar to remove
     - basic PPL buttons for users w/o workout plans
@@ -9,3 +13,4 @@ calendar styling ->
     - change color for days outside of cur month
     - change DnD workout plan colors
     - 
+

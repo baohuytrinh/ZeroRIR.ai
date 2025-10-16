@@ -10,6 +10,8 @@ import PlanBuilder from './pages/PlanBuilder'
 import Auth from './pages/auth'
 import { useState, useEffect } from 'react'
 import Chatbot from './components/chatbot'
+import Charts from './pages/charts'
+
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -47,6 +49,7 @@ function App() {
               <Route path="/workouts" element={<Workouts />}/>
               <Route path="/PlanBuilder" element={<PlanBuilder />}/>
               <Route path="/calendar" element={<CalendarPage />}/>
+              <Route path="/charts" element={<Charts />}/>
             </Routes>
           </main>
         </>

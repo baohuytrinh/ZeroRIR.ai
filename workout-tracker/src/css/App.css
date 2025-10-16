@@ -1,8 +1,27 @@
 #root {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  #root {
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 425px) {
+  #root {
+    padding: 0.25rem;
+  }
 }
 
 .logout-btn {
@@ -12,24 +31,22 @@
   border: 1px solid rgb(41, 39, 39);
   padding: .5rem;
   font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
 }
 
-.logout-btn:hover {
-  transform: scale(1.05);
-  transition: .3s ease all;
+@media (max-width: 768px) {
+  .logout-btn {
+    padding: .3rem;
+    font-size: 0.8rem;
+  }
 }
 
-.logout-btn:hover:after {
-
-  
-}
-
-.rbc-btn-group button {
-  pointer-events: auto !important;
-  cursor: pointer;
-}
-
-.rbc-toolbar button {
-  pointer-events: auto !important;
-  cursor: pointer;
+@media (max-width: 425px) {
+  .logout-btn {
+    padding: .2rem;
+    font-size: 0.7rem;
+  }
 }
