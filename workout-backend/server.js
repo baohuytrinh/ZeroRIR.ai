@@ -190,25 +190,53 @@ app.post('/api/ai', authMiddleware, async (req, res) => {
         ${userData}
         Now answer the user's question: ${prompt}`
 
+        console.log('Making OpenAI request...');
+        console.log('API Key exists:', !!process.env.openAI_API_KEY);
+        
         const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: {
-                'Content-Type' : 'application/json',
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${process.env.openAI_API_KEY}`
             },
             body: JSON.stringify({
-                model: "gpt-4.1",
+                model: "gpt-5", // 
                 messages: [{ role: "user", content: fullPrompt }],
                 max_tokens: 400
             })
         });
+        
+        console.log('OpenAI response status:', openaiRes.status);
+        
+        if (!openaiRes.ok) {
+            const errorData = await openaiRes.text();
+            console.error('OpenAI API error:', errorData);
+            return res.status(500).json({ 
+                error: 'OpenAI API error', 
+                details: errorData 
+            });
+        }
+        
         const data = await openaiRes.json();
-        res.json({ ai: data.choices[0].message.content });
+        console.log('OpenAI response data:', data);
+        
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+            res.json({ ai: data.choices[0].message.content });
+        } else {
+            console.error('Unexpected OpenAI response format:', data);
+            res.status(500).json({ 
+                error: 'Unexpected response format from OpenAI',
+                details: data 
+            });
+        }
     } catch (err) {
-        res.status(500).json({error: 'AI request failed', details: err.message });
+        console.error('AI request failed:', err);
+        res.status(500).json({
+            error: 'AI request failed', 
+            details: err.message 
+        });
     }
 });
-
 
 
 app.get('/api/protected', authMiddleware, (req, res) => {
