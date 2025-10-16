@@ -18,7 +18,7 @@ export const searchExercises = async (muscle) => {
 
 //workout
 export const addWorkout = async (workout) => {
-    const response = await fetch('http://localhost:8000/api/workouts', {
+    const response = await fetch('https://workout-backend-v932.onrender.com/api/workouts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...getAuthHeaders()},
         body: JSON.stringify(workout)
@@ -27,7 +27,7 @@ export const addWorkout = async (workout) => {
 };
 
 export const deleteWorkout = async (workout) => {
-    const response = await fetch('http://localhost:8000/api/workouts', {
+    const response = await fetch('https://workout-backend-v932.onrender.com/api/workouts', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders()},
       body: JSON.stringify(workout)
@@ -38,7 +38,7 @@ export const deleteWorkout = async (workout) => {
 
 //plan
 export const createWorkoutPlan = async (plan) => {
-    const response = await fetch('http://localhost:8000/api/plans', {
+    const response = await fetch('https://workout-backend-v932.onrender.com/api/plans', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...getAuthHeaders()},
       body: JSON.stringify(plan)
@@ -47,7 +47,7 @@ export const createWorkoutPlan = async (plan) => {
 };
 
 export const deletePlan = async (name) => {
-  const response = await fetch('http://localhost:8000/api/plans', {
+  const response = await fetch('https://workout-backend-v932.onrender.com/api/plans', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', ...getAuthHeaders()},
     body: JSON.stringify({name})
@@ -64,14 +64,14 @@ const getAuthHeaders = () => {
 
 //calendar
 export const fetchCalendarEvents = async () => {
-  const response = await fetch('http://localhost:8000/api/calendar', {
+  const response = await fetch('https://workout-backend-v932.onrender.com/api/calendar', {
     headers: { ...getAuthHeaders() }
   });
   return response.json();
 };
   
 export const addCalendarEvent = async (event) => {
-  const response = await fetch('http://localhost:8000/api/calendar', {
+  const response = await fetch('https://workout-backend-v932.onrender.com/api/calendar', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
     body: JSON.stringify(event)
@@ -80,7 +80,7 @@ export const addCalendarEvent = async (event) => {
 };
   
 export const updateCalendarEvent = async (id, updates) => {
-  const response = await fetch(`http://localhost:8000/api/calendar/${id}`, {
+  const response = await fetch(`https://workout-backend-v932.onrender.com/api/calendar/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
     body: JSON.stringify(updates)
@@ -89,7 +89,7 @@ export const updateCalendarEvent = async (id, updates) => {
 };
 
 export const deleteCalendarEvent = async (id) => {
-  const response = await fetch(`http://localhost:8000/api/calendar/${id}`, {
+  const response = await fetch(`https://workout-backend-v932.onrender.com/api/calendar/${id}`, {
       method: 'DELETE',
       headers: { ...getAuthHeaders() 
       }});
@@ -100,14 +100,14 @@ export const deleteCalendarEvent = async (id) => {
 //charts
 
 export const fetchWorkoutData = async (timeRange = '30') => {
-  const response = await fetch(`http://localhost:8000/api/workouts?range=${timeRange}`, {
+  const response = await fetch(`https://workout-backend-v932.onrender.com/api/workouts?range=${timeRange}`, {
     headers: { ...getAuthHeaders() }
   });
   return response.json();
 };
 
 export const fetchProgressData = async (timeRange = '30') => {
-  const response = await fetch(`http://localhost:8000/api/workouts?range=${timeRange}`, {
+  const response = await fetch(`https://workout-backend-v932.onrender.com/api/workouts?range=${timeRange}`, {
     headers: { ...getAuthHeaders() }
   });
   return response.json();

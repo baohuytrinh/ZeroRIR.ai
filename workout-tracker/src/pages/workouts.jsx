@@ -8,7 +8,7 @@ function Workouts(){
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch('http://localhost:8000/api/workouts', {
+        fetch('https://workout-backend-v932.onrender.com/api/workouts', {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => {

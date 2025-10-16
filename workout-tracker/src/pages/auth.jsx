@@ -12,7 +12,7 @@ export default function Auth({ onAuth }) {
     setError('');
     const endpoint = mode === 'login' ? '/api/login' : '/api/register';
     try {
-      const res = await fetch(`http://localhost:8000${endpoint}`, {
+      const res = await fetch(`https://workout-backend-v932.onrender.com${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

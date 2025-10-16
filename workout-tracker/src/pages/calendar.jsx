@@ -58,7 +58,7 @@ function CalendarPage() {
       setEvents(eventsWithDates);
     });
 
-    fetch('http://localhost:8000/api/plans', {
+    fetch('https://workout-backend-v932.onrender.com/api/plans', {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
       .then(res => res.json())

@@ -6,7 +6,14 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: [
+        "https://workout-tracker-ye3y.onrender.com", 
+        "https://workout-frontend.onrender.com",
+        "http://localhost:3000"
+    ],
+    credentials: true
+}));
 app.use(express.json());
 
 const client = new MongoClient(process.env.MONGODB_URI);
@@ -37,6 +44,9 @@ app.post('/api/workouts', authMiddleware, async (req, res) => {
 
 app.get('/api/workouts', authMiddleware, async (req, res) => {
     const username = req.user.username; // jwt
+    const { range } = req.query; // Get range parameter if provided
+    
+    // For now, just return all workouts (you can add date filtering later)
     const workouts = await workoutsCollection.find({username}).toArray();
     const filtered = workouts.map(({ name, muscle, sets, reps, weight }) => ({
          name, muscle, sets, reps, weight
@@ -206,4 +216,7 @@ app.get('/api/protected', authMiddleware, (req, res) => {
 });
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, ()  => console.log(`Server running on port http://localhost:${PORT}/api/workouts`));
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`API base URL: http://localhost:${PORT}/api (for local testing)`);
+  });

@@ -35,7 +35,7 @@ function Chatbot() {
         setPrompt('');
 
         try {
-            const res = await fetch('http://localhost:8000/api/ai', {
+            const res = await fetch('https://workout-backend-v932.onrender.com/api/ai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

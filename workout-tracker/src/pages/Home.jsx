@@ -64,7 +64,7 @@ function Home(){
         };
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:8000/api/workouts', {
+            const response = await fetch('https://workout-backend-v932.onrender.com/api/workouts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
