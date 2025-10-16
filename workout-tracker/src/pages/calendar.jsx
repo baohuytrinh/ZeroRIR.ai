@@ -1,5 +1,4 @@
 import React, { useState, useEffect} from 'react';
-
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -15,7 +14,6 @@ import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import { fetchCalendarEvents, addCalendarEvent, updateCalendarEvent, deleteCalendarEvent} from '../services/api.js';
 
 const DnDCalendar = withDragAndDrop(Calendar);
-
 
 const locales = { 'en-US' : enUS };
 const localizer = dateFnsLocalizer({
@@ -48,13 +46,10 @@ function CalendarPage() {
   const [date, setDate] = useState(new Date()); 
   const [view, setView] = useState('month');
   const [plans, setPlans] = useState([]);
-  
   const [draggedPlan, setDraggedPlan] = useState(null);
-
 
   useEffect(() => {
     fetchCalendarEvents().then(fetchedEvents => {
-      //converted start/end to date objs
       const eventsWithDates = fetchedEvents.map(ev => ({
         ...ev,
         start: new Date(ev.start),
@@ -70,7 +65,6 @@ function CalendarPage() {
       .then(setPlans);
   }, []);
 
-  //moves objects/events
   const moveEvent = async ({ event, start, end, isAllDay }) => {
     const updated = { ...event, start, end, allDay: isAllDay };
     setEvents(events.map(ev => ev === event ? updated : ev));
@@ -79,23 +73,22 @@ function CalendarPage() {
     }
   };
 
-  //adding new events (button, external drag, etc)
   const handleAddEvent = async () => {
     const newEvent = {
       title: "Test Event",
       start: new Date(),
-      end: new Date(new Date().getTime() + 60 * 60 * 1000), //1hr
+      end: new Date(new Date().getTime() + 60 * 60 * 1000),
       allDay: false
     };
     const saved = await addCalendarEvent(newEvent);
     setEvents([...events, { ...saved, start: new Date(saved.start), end: new Date(saved.end) }]);
-    };
+  };
 
   const handleDeleteEvent = async (event) => {
     if (window.confirm(`Delete event "${event.title}"?`)) {
       await deleteCalendarEvent(event._id);
       setEvents(events.filter(ev => ev._id !== event._id));
-      }
+    }
   };
 
   const handleDragStart = (plan) => {
@@ -104,48 +97,47 @@ function CalendarPage() {
 
   const handleDropFromOutside = ({ start, end, allDay }) => {
     if (!draggedPlan) return;
-    //creates new event based on plan
     const newEvent = {
       title: draggedPlan.name,
       start,
       end,
       allDay,
-      plan: draggedPlan, //optionally store plan details
+      plan: draggedPlan,
     };
-    //save to db
     addCalendarEvent(newEvent).then(saved => {
       setEvents([...events, { ...saved, start: new Date(saved.start), end: new Date(saved.end) }]);
     });
   };
 
   return (
-    <div className="calendar-container" style={{display: 'flex', justifyContent: 'center', gap: '3rem', border: '1px solid black', marginTop: '-5rem', paddingRight:'8rem', left: ''}}>
-      <div className="plans-box" >
-        <h4 style={{fontSize: '30px'}}>Your workout plans</h4>
-        {plans.map((plan, idx) => (
-          <div 
-            className="draggable-plan"
-            key={idx}
-            draggable
-            onDragStart={() => handleDragStart(plan)}
-            >
-              <b style={{fontSize: '30px'}}>{plan.name}</b>
-              <p>
-                {plan.exercises.map((ex, i) => (
-                  <p className= 'workout-plan-cal' key={i}> {ex.name} ({ex.muscle})</p>
-                ))}
-              </p>
+    <div className="calendar-page-container">
+      <div className="calendar-container">
+        <div className="plans-sidebar">
+          <div className="instructions-box">
+            Delete an event by clicking on it
           </div>
-        ))}
-      </div>
-      <div className='calendar' style={{ height: 600, margin: '2rem', width: '1000px'}}>
-        <button className="add-event-btn" onClick={handleAddEvent} style={{marginBottom: 10}}>Add Test Event</button>
-        <DnDCalendar
+          <h4 className="plans-title">Your workout plans</h4>
+          <div className="plans-list">
+            {plans.map((plan, idx) => (
+              <div 
+                className="draggable-plan"
+                key={idx}
+                draggable
+                onDragStart={() => handleDragStart(plan)}
+              >
+                <span className="plan-name">{plan.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="calendar-wrapper">
+          <DnDCalendar
             localizer={localizer}
             events={events}
             startAccessor="start"
             endAccessor="end"
-            style={{ height: 500 }}
+            className="calendar"
             date={date}
             view={view}                    
             onNavigate={setDate}
@@ -153,13 +145,12 @@ function CalendarPage() {
             onEventDrop={moveEvent} 
             draggableAccessor={() => true} 
             onSelectEvent={handleDeleteEvent}
-            
             onDropFromOutside={handleDropFromOutside}
             dragFromOutsideItem={() => draggedPlan}
           />
+        </div>
       </div>
     </div>
-    
   );
 }
 
