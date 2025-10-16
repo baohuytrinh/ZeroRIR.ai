@@ -13,41 +13,57 @@ function Chatbot() {
     const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
     const formatMessage = (text) => {
-    const paragraphs = text.split('\n\n');
-    
-    return paragraphs.map((paragraph, index) => {
-        let formatted = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        formatted = formatted.replace(/\n/g, '<br>');
+        const paragraphs = text.split('\n\n');
         
-        return (
-            <div key={index} style={{ marginBottom: '10px' }}>
-                <span dangerouslySetInnerHTML={{ __html: formatted }} />
-            </div>
-        );
-    });
-};
+        return paragraphs.map((paragraph, index) => {
+            let formatted = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            
+            return (
+                <div key={index} style={{ marginBottom: '10px' }}>
+                    <span dangerouslySetInnerHTML={{ __html: formatted }} />
+                </div>
+            );
+        });
+    };
 
     const sendMessage = async() => {
         if (!prompt.trim()) return;
         setLoading(true);
         setMessages([...messages, { from: 'user', text: prompt}]);
+        const currentPrompt = prompt;
         setPrompt('');
 
         try {
+            console.log('Sending request to:', 'https://workout-backend-v932.onrender.com/api/ai');
+            console.log('Token:', localStorage.getItem('token'));
+            
             const res = await fetch('https://workout-backend-v932.onrender.com/api/ai', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
-                body: JSON.stringify({ prompt }),
+                body: JSON.stringify({ prompt: currentPrompt }),
             });
+            
+            console.log('Response status:', res.status);
+            console.log('Response headers:', res.headers);
+            
             const data = await res.json();
-            setMessages((msgs) => [...msgs, { from: 'ai', text: data.ai}]);
-            setLoading(false);
+            console.log('Response data:', data);
+            
+            if (data.ai) {
+                setMessages((msgs) => [...msgs, { from: 'ai', text: data.ai}]);
+            } else {
+                console.error('No AI response in data:', data);
+                setMessages((msgs) => [...msgs, {from: 'ai', text: 'Error: Invalid response format.'}]);
+            }
         } catch (err) {
-            setMessages((msgs) => [...msgs, {from: 'ai', text: 'Error: Could not get response.'}]);
+            console.error('Chatbot error:', err);
+            setMessages((msgs) => [...msgs, {from: 'ai', text: `Error: ${err.message}`}]);
+        } finally {
             setLoading(false);
         }
     };
