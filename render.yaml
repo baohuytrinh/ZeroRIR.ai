@@ -11,9 +11,9 @@ services:
           property: connectionString
       - key: JWT_SECRET
         generateValue: true
-      - key: openAI_API_KEY
+      - key: OPENAI_API_KEY
         sync: false
-    plan: free
+    plan: starter  # Changed from 'free'
 
   - type: web
     name: workout-frontend
@@ -23,9 +23,8 @@ services:
     envVars:
       - key: VITE_API_URL
         value: https://workout-backend.onrender.com
-    plan: free
+    plan: starter  # Changed from 'free'
 
 databases:
   - name: workout-db
-    plan: free
-    databaseName: workout_tracker
+    plan: starter  # Changed from 'free'
