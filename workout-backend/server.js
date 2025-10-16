@@ -197,7 +197,7 @@ app.post('/api/ai', authMiddleware, async (req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.openAI_API_KEY}`
+                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
             },
             body: JSON.stringify({
                 model: "gpt-5", // 
